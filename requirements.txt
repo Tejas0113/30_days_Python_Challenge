@@ -1,0 +1,5 @@
+# 30 Days of Python Challenge
+# Python Standard Library is used for Day 01 (turtle, colorsys)
+
+# Optional / Utility libraries for script automation and image preview generation
+pillow>=10.0.0
