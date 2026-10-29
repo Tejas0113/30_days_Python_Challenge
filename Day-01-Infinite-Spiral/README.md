@@ -6,10 +6,6 @@
 ---
 
 <p align="center">
-  <img src="../../assets/day01_animation.gif" alt="Infinite Rainbow Spiral Animation" width="480px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 240, 255, 0.25);" />
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/Status-Completed%20%E2%9C%85-brightgreen?style=for-the-badge" alt="Status" />
   <img src="https://img.shields.io/badge/Language-Python%203.10%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
   <img src="https://img.shields.io/badge/Category-Generative%20Art%20%26%20GUI-9cf?style=for-the-badge" alt="Category" />
@@ -53,12 +49,7 @@ This double-buffering technique allows hundreds of lines to render instantaneous
 
 ### Option 1: Direct Execution
 ```bash
-python days/Day-01-Infinite-Spiral/main.py
-```
-
-### Option 2: From Workspace Root
-```bash
-python day01_spiral.py
+python Day-01-Infinite-Spiral/main.py
 ```
 
 > **Tip:** Close the window or press `Ctrl + C` in the terminal to exit gracefully.
@@ -86,5 +77,5 @@ No external dependencies required! Runs right out of the box with standard Pytho
 ---
 
 <p align="center">
-  <a href="../../README.md"><b>⬅️ Return to 30 Days Challenge Tracker</b></a>
+  <a href="../README.md"><b>⬅️ Return to 30 Days Challenge</b></a>
 </p>
