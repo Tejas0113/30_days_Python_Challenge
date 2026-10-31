@@ -5,6 +5,7 @@ Author: Tejas (@Tejas0113)
 
 This script scans the repository for completed days, recalculates progress statistics,
 and automatically updates the master README.md (badges, visual progress bar, and challenge table).
+Outputs/previews are kept inside individual day READMEs to maintain a clean master dashboard.
 """
 
 import os
@@ -12,293 +13,301 @@ import re
 import sys
 from pathlib import Path
 
-# Predefined curriculum for 30 Days Python Challenge
+# 30 Days Python Challenge Curriculum - Creative, Visual & Interactive Projects
 CURRICULUM = [
     {
         "day": 1,
         "title": "Infinite Rainbow Spiral",
-        "concepts": "Turtle Graphics, HSV Color Space, 60 FPS Frame Buffering",
+        "description": "Dynamic rotating rainbow spiral using HSV color wheel and smooth 60 FPS buffer rendering.",
+        "concepts": "Turtle Graphics, HSV Color Space, Frame Buffering",
         "category": "Generative Art",
         "folder": "Day-01-Infinite-Spiral",
         "entry": "days/Day-01-Infinite-Spiral/main.py",
-        "preview": "assets/day01_animation.gif"
     },
     {
         "day": 2,
         "title": "Turtle Flower Drawing",
-        "concepts": "Turtle Graphics, Mathematical Petal Curves, Starfield",
+        "description": "Procedural multi-layered blossom with Fermat spiral center floret, curved stem, and starry background.",
+        "concepts": "Turtle Graphics, Parametric Curves, Spiral Phyllotaxis",
         "category": "Generative Art",
         "folder": "Day-02-Flower-Drawing",
         "entry": "days/Day-02-Flower-Drawing/main.py",
-        "preview": "assets/day02_preview.png"
     },
     {
         "day": 3,
         "title": "Animated Analog Clock",
+        "description": "Real-time system-synced analog clock with trigonometric hour, minute, and second hand animations.",
         "concepts": "Turtle Graphics, Time Module, Trigonometric Hand Angles",
         "category": "GUI & Automation",
         "folder": "Day-03-Automated-Clock",
         "entry": "days/Day-03-Automated-Clock/main.py",
-        "preview": ""
     },
     {
         "day": 4,
-        "title": "Real-time Weather CLI & Visualizer",
-        "concepts": "REST APIs, Requests, JSON Parsing, Rich Terminal UI",
-        "category": "CLI Tools",
-        "folder": "Day-04-Weather-CLI",
-        "entry": "days/Day-04-Weather-CLI/main.py",
-        "preview": ""
+        "title": "Neon Arcade Pong Game",
+        "description": "Classic 2-player paddle arcade with ball bounce physics, paddle collision bounding boxes, and score display.",
+        "concepts": "Turtle / Pygame, Elastic Collisions, Keyboard Input Binding",
+        "category": "2D Game Dev",
+        "folder": "Day-04-Neon-Arcade-Pong",
+        "entry": "days/Day-04-Neon-Arcade-Pong/main.py",
     },
     {
         "day": 5,
-        "title": "Advanced Password Vault & Generator",
-        "concepts": "Cryptography, SHA-256, Fernet, Secure Memory Handling",
-        "category": "Cybersecurity",
-        "folder": "Day-05-Password-Vault",
-        "entry": "days/Day-05-Password-Vault/main.py",
-        "preview": ""
+        "title": "Procedural Fractal Tree & Forest",
+        "description": "Recursive branching tree with wind animation, depth-based color gradients, and falling blossom particles.",
+        "concepts": "Recursive Algorithms, Branching Angles, Dynamic Color Gradients",
+        "category": "Generative Art",
+        "folder": "Day-05-Fractal-Tree",
+        "entry": "days/Day-05-Fractal-Tree/main.py",
     },
     {
         "day": 6,
-        "title": "Bulk File Organizer & Renamer",
-        "concepts": "OS, Shutil, Pathlib, Regex, File System Manipulation",
-        "category": "Productivity",
-        "folder": "Day-06-File-Organizer",
-        "entry": "days/Day-06-File-Organizer/main.py",
-        "preview": ""
+        "title": "Retro Snake Arcade",
+        "description": "Iconic arcade snake game featuring grid movement, dynamic food spawning, score tracking, and tail collision.",
+        "concepts": "Grid Coordinates, List Queues, Game Loops, Collision Detection",
+        "category": "2D Game Dev",
+        "folder": "Day-06-Retro-Snake",
+        "entry": "days/Day-06-Retro-Snake/main.py",
     },
     {
         "day": 7,
-        "title": "Markdown to Clean HTML/PDF Converter",
-        "concepts": "Python-Markdown, Regex Parsing, CSS Ingestion, WeasyPrint",
-        "category": "Document Tools",
-        "folder": "Day-07-Markdown-Converter",
-        "entry": "days/Day-07-Markdown-Converter/main.py",
-        "preview": ""
+        "title": "Conway's Game of Life Simulation",
+        "description": "Interactive cellular automata grid simulation modeling birth, survival, and death patterns (gliders, pulsars).",
+        "concepts": "Cellular Automata, 2D Array Grids, State Evolution Rules",
+        "category": "Simulation",
+        "folder": "Day-07-Conways-Game-of-Life",
+        "entry": "days/Day-07-Conways-Game-of-Life/main.py",
     },
     {
         "day": 8,
-        "title": "Multi-threaded Fast Port Scanner",
-        "concepts": "Socket Programming, ThreadPoolExecutor, Network Protocols",
-        "category": "Networking",
-        "folder": "Day-08-Port-Scanner",
-        "entry": "days/Day-08-Port-Scanner/main.py",
-        "preview": ""
+        "title": "Interactive Kaleidoscope & Mandala",
+        "description": "Real-time drawing canvas replicating mouse/keyboard strokes across 8-fold rotational and mirror symmetries.",
+        "concepts": "Rotational Symmetry, Polar-to-Cartesian Mapping, Event Listeners",
+        "category": "Generative Art",
+        "folder": "Day-08-Interactive-Kaleidoscope",
+        "entry": "days/Day-08-Interactive-Kaleidoscope/main.py",
     },
     {
         "day": 9,
-        "title": "Personal Finance & Expense Tracker",
-        "concepts": "SQLite3, Relational Queries, Aggregation, Tabulate",
-        "category": "Database & Finance",
-        "folder": "Day-09-Expense-Tracker",
-        "entry": "days/Day-09-Expense-Tracker/main.py",
-        "preview": ""
+        "title": "Flappy Bird Physics Clone",
+        "description": "Side-scrolling arcade game with gravity acceleration, flap velocity impulses, moving pipe pairs, and hitboxes.",
+        "concepts": "Gravity & Velocity Vectors, Obstacle Spawning, AABB Hitboxes",
+        "category": "2D Game Dev",
+        "folder": "Day-09-Flappy-Bird",
+        "entry": "days/Day-09-Flappy-Bird/main.py",
     },
     {
         "day": 10,
-        "title": "Modern Pomodoro Productivity Timer",
-        "concepts": "CustomTkinter / Tkinter, Audio Alerts, State Machine",
-        "category": "GUI Applications",
-        "folder": "Day-10-Pomodoro-Timer",
-        "entry": "days/Day-10-Pomodoro-Timer/main.py",
-        "preview": ""
+        "title": "Gravitational Solar System Simulator",
+        "description": "Multi-body planetary orbital mechanics simulation using Newton's law of universal gravitation with glowing orbit trails.",
+        "concepts": "Newtonian Gravity, Orbital Mechanics, Vector Acceleration",
+        "category": "Physics Simulation",
+        "folder": "Day-10-Solar-System-Simulator",
+        "entry": "days/Day-10-Solar-System-Simulator/main.py",
     },
     {
         "day": 11,
-        "title": "Automated YouTube Video Downloader",
-        "concepts": "Pytubefix / yt-dlp wrapper, Streams, Progress Callbacks",
-        "category": "Media Tools",
-        "folder": "Day-11-Video-Downloader",
-        "entry": "days/Day-11-Video-Downloader/main.py",
-        "preview": ""
+        "title": "Matrix Digital Rain Visualizer",
+        "description": "Hypnotic falling green Japanese katakana & code rain with decaying phosphorescent light trails.",
+        "concepts": "Terminal Buffering, Glyph Streams, Decay Timing",
+        "category": "Visual Effects",
+        "folder": "Day-11-Matrix-Rain-Visualizer",
+        "entry": "days/Day-11-Matrix-Rain-Visualizer/main.py",
     },
     {
         "day": 12,
-        "title": "Live Cryptocurrency Ticker & Alert Bot",
-        "concepts": "CoinGecko API, WebSockets / Polling, Push Notifications",
-        "category": "Financial Tech",
-        "folder": "Day-12-Crypto-Ticker",
-        "entry": "days/Day-12-Crypto-Ticker/main.py",
-        "preview": ""
+        "title": "Sorting Algorithm Visualizer",
+        "description": "Animated visual comparison of Bubble, Selection, Insertion, and Quick Sort with real-time bar height swaps and colors.",
+        "concepts": "Sorting Algorithms, Visual Bar Swaps, Algorithmic Complexity",
+        "category": "Algorithm Visualizer",
+        "folder": "Day-12-Sorting-Visualizer",
+        "entry": "days/Day-12-Sorting-Visualizer/main.py",
     },
     {
         "day": 13,
-        "title": "QR Code Generator & Scanner Suite",
-        "concepts": "qrcode, OpenCV (cv2), Image Processing, Binary Encoding",
-        "category": "Computer Vision",
-        "folder": "Day-13-QR-Code-Suite",
-        "entry": "days/Day-13-QR-Code-Suite/main.py",
-        "preview": ""
+        "title": "Double Pendulum Chaos Simulator",
+        "description": "Physics simulation of a chaotic double pendulum tracing unpredictable, beautiful kaleidoscopic phase space trails.",
+        "concepts": "Chaos Theory, Lagrangian Mechanics, Numerical Integration",
+        "category": "Physics Simulation",
+        "folder": "Day-13-Double-Pendulum-Chaos",
+        "entry": "days/Day-13-Double-Pendulum-Chaos/main.py",
     },
     {
         "day": 14,
-        "title": "Dynamic Typing Speed Test CLI",
-        "concepts": "Curses / Time, WPM Calculation, Accuracy Rate, Key Listeners",
-        "category": "CLI Games",
-        "folder": "Day-14-Typing-Test",
-        "entry": "days/Day-14-Typing-Test/main.py",
-        "preview": ""
+        "title": "Retro Space Invaders Arcade",
+        "description": "Galactic arcade defender with alien marching grids, player laser cannons, defensive barriers, and mystery UFOs.",
+        "concepts": "Sprite Arrays, Projectile Management, Marching Movement Logic",
+        "category": "2D Game Dev",
+        "folder": "Day-14-Space-Invaders",
+        "entry": "days/Day-14-Space-Invaders/main.py",
     },
     {
         "day": 15,
-        "title": "FastAPI Microservice with Swagger UI",
-        "concepts": "FastAPI, Pydantic, RESTful CRUD, OpenAPI Documentation",
-        "category": "Backend Web API",
-        "folder": "Day-15-FastAPI-Service",
-        "entry": "days/Day-15-FastAPI-Service/main.py",
-        "preview": ""
+        "title": "Algorithmic Maze Generator & Solver",
+        "description": "Procedural maze generation using Recursive Backtracking / Depth-First Search with live visual pathfinding resolution.",
+        "concepts": "Depth-First Search (DFS), Recursive Backtracking, Graph Traversal",
+        "category": "Algorithm Visualizer",
+        "folder": "Day-15-Maze-Generator-Solver",
+        "entry": "days/Day-15-Maze-Generator-Solver/main.py",
     },
     {
         "day": 16,
-        "title": "Automated Email Newsletter Dispatcher",
-        "concepts": "SMTPlib, Email MIME, Jinja2 Templates, Secure TLS",
-        "category": "Automation",
-        "folder": "Day-16-Email-Dispatcher",
-        "entry": "days/Day-16-Email-Dispatcher/main.py",
-        "preview": ""
+        "title": "Particle Fireworks & Sparkle Engine",
+        "description": "Colorful fireworks bursting into hundreds of glowing particles with gravity drag, air resistance, and alpha decay.",
+        "concepts": "Particle Systems, Velocity Decay, Radial Burst Physics",
+        "category": "Particle Systems",
+        "folder": "Day-16-Particle-Fireworks",
+        "entry": "days/Day-16-Particle-Fireworks/main.py",
     },
     {
         "day": 17,
-        "title": "Intelligent Wikipedia & Knowledge Bot",
-        "concepts": "NLP, Wikipedia API, Text Summarization, CLI Chat",
-        "category": "AI & NLP",
-        "folder": "Day-17-Knowledge-Bot",
-        "entry": "days/Day-17-Knowledge-Bot/main.py",
-        "preview": ""
+        "title": "Mandelbrot & Julia Set Fractal Explorer",
+        "description": "Interactive deep-zoom visualizer rendering the infinite boundary of the Mandelbrot and Julia set complex equations.",
+        "concepts": "Complex Numbers, Escape-Time Formula, Color Paletting",
+        "category": "Mathematical Art",
+        "folder": "Day-17-Mandelbrot-Fractal",
+        "entry": "days/Day-17-Mandelbrot-Fractal/main.py",
     },
     {
         "day": 18,
-        "title": "System Resource Monitor Dashboard",
-        "concepts": "Psutil, CPU/RAM/Disk Metrics, Realtime Terminal Graphs",
-        "category": "SysAdmin & DevOps",
-        "folder": "Day-18-System-Monitor",
-        "entry": "days/Day-18-System-Monitor/main.py",
-        "preview": ""
+        "title": "Audio Spectrum & Beat Visualizer",
+        "description": "Real-time equalizer bars and circular audio spectrum responding dynamically to audio waveforms and frequency beats.",
+        "concepts": "Fast Fourier Transform (FFT), Frequency Bins, Dynamic Scaling",
+        "category": "Audio & Signal Processing",
+        "folder": "Day-18-Audio-Spectrum-Visualizer",
+        "entry": "days/Day-18-Audio-Spectrum-Visualizer/main.py",
     },
     {
         "day": 19,
-        "title": "Audio Spectrum Visualizer",
-        "concepts": "NumPy, Wave, Pygame / Matplotlib, Fast Fourier Transform (FFT)",
-        "category": "Signal Processing",
-        "folder": "Day-19-Audio-Visualizer",
-        "entry": "days/Day-19-Audio-Visualizer/main.py",
-        "preview": ""
+        "title": "Elastic Balls Collision Physics Sandbox",
+        "description": "Interactive physics simulation of multi-sized colored spheres colliding elastically with conservation of momentum.",
+        "concepts": "2D Vector Math, Elastic Collision Response, Momentum Conservation",
+        "category": "Physics Simulation",
+        "folder": "Day-19-Bouncing-Balls-Physics",
+        "entry": "days/Day-19-Bouncing-Balls-Physics/main.py",
     },
     {
         "day": 20,
-        "title": "Custom URL Shortener & Analytics",
-        "concepts": "Flask / SQLite, Base62 Encoding, Click Tracking, Redirects",
-        "category": "Fullstack Web",
-        "folder": "Day-20-URL-Shortener",
-        "entry": "days/Day-20-URL-Shortener/main.py",
-        "preview": ""
+        "title": "2D Raycasting Pseudo-3D Engine",
+        "description": "Retro Wolfenstein 3D-style raycasting engine rendering pseudo-3D first-person perspective walls from a 2D grid.",
+        "concepts": "Raycasting, DDA Algorithm, Field of View (FOV), Wall Slicing",
+        "category": "Graphics Engine",
+        "folder": "Day-20-Raycasting-Engine",
+        "entry": "days/Day-20-Raycasting-Engine/main.py",
     },
     {
         "day": 21,
-        "title": "Image Watermarking & Batch Filter Tool",
-        "concepts": "Pillow (PIL), Alpha Compositing, EXIF Data, Batch Processing",
-        "category": "Image Processing",
-        "folder": "Day-21-Image-Watermarker",
-        "entry": "days/Day-21-Image-Watermarker/main.py",
-        "preview": ""
+        "title": "A* & Dijkstra Pathfinding Visualizer",
+        "description": "Visual grid navigation tool calculating shortest paths around user-drawn walls with real-time open/closed set animations.",
+        "concepts": "A* Search, Dijkstra Algorithm, Priority Queues, Manhattan Distance",
+        "category": "Algorithm Visualizer",
+        "folder": "Day-21-Pathfinding-Visualizer",
+        "entry": "days/Day-21-Pathfinding-Visualizer/main.py",
     },
     {
         "day": 22,
-        "title": "Command-Line Git Branch & Commit Explorer",
-        "concepts": "GitPython / Subprocess, Git Plumbing, Branch Visualizer",
-        "category": "Developer Tools",
-        "folder": "Day-22-Git-Explorer",
-        "entry": "days/Day-22-Git-Explorer/main.py",
-        "preview": ""
+        "title": "Interactive Water Ripple Wave Sandbox",
+        "description": "Dynamic fluid grid simulating water ripple propagation, reflections against boundaries, and mouse droplet disturbances.",
+        "concepts": "Discrete Wave Equation, Velocity Damping, Surface Disturbance",
+        "category": "Physics Simulation",
+        "folder": "Day-22-Water-Ripple-Simulation",
+        "entry": "days/Day-22-Water-Ripple-Simulation/main.py",
     },
     {
         "day": 23,
-        "title": "Stock Market Backtesting & Trend Predictor",
-        "concepts": "Pandas, Moving Averages (SMA/EMA), Matplotlib plotting",
-        "category": "Data Science",
-        "folder": "Day-23-Stock-Backtester",
-        "entry": "days/Day-23-Stock-Backtester/main.py",
-        "preview": ""
+        "title": "Classic Asteroids Vector Space Combat",
+        "description": "360-degree rotational spaceship combat with inertia physics, screen wrap-around, and splitting floating asteroids.",
+        "concepts": "Angular Momentum, Toroidal Screen Wrap, Polygonal Splitting",
+        "category": "2D Game Dev",
+        "folder": "Day-23-Asteroids-Arcade",
+        "entry": "days/Day-23-Asteroids-Arcade/main.py",
     },
     {
         "day": 24,
-        "title": "Chat Application with Sockets & Threads",
-        "concepts": "TCP Socket Server, Client Broadcasting, Threading, Chat Protocol",
-        "category": "Network Engineering",
-        "folder": "Day-24-Socket-Chat",
-        "entry": "days/Day-24-Socket-Chat/main.py",
-        "preview": ""
+        "title": "Cyberpunk Digital Synth & Piano",
+        "description": "Playable graphical synthesizer keyboard generating synthesized musical notes with glowing neon key feedback.",
+        "concepts": "Audio Synthesis, Sine Waves, GUI Keypress Binding",
+        "category": "GUI & Audio",
+        "folder": "Day-24-Visual-Synthesizer",
+        "entry": "days/Day-24-Visual-Synthesizer/main.py",
     },
     {
         "day": 25,
-        "title": "PDF Merged, Watermarked & Encrypted Toolkit",
-        "concepts": "pypdf / PyPDF2, Encryption, Split/Merge, Page Rotation",
-        "category": "PDF Processing",
-        "folder": "Day-25-PDF-Toolkit",
-        "entry": "days/Day-25-PDF-Toolkit/main.py",
-        "preview": ""
+        "title": "3D Perspective Infinite Starfield Flight",
+        "description": "Hyperspace warp simulation projecting thousands of 3D stars through a perspective camera to create high-speed flight.",
+        "concepts": "3D-to-2D Perspective Projection, Z-axis Warp, Velocity Trails",
+        "category": "Visual Effects",
+        "folder": "Day-25-Starfield-Warp-Flight",
+        "entry": "days/Day-25-Starfield-Warp-Flight/main.py",
     },
     {
         "day": 26,
-        "title": "Interactive Data Dashboard with Streamlit",
-        "concepts": "Streamlit, Plotly, Interactive Filters, CSV File Ingestion",
-        "category": "Data Apps",
-        "folder": "Day-26-Data-Dashboard",
-        "entry": "days/Day-26-Data-Dashboard/main.py",
-        "preview": ""
+        "title": "Craig Reynolds Boids Flocking Simulation",
+        "description": "Autonomous swarm intelligence modeling bird flocks and fish schools using Separation, Alignment, and Cohesion forces.",
+        "concepts": "Flocking Algorithms, Autonomous Agents, Vector Steering",
+        "category": "Autonomous Systems",
+        "folder": "Day-26-Boids-Flocking-Simulation",
+        "entry": "days/Day-26-Boids-Flocking-Simulation/main.py",
     },
     {
         "day": 27,
-        "title": "Regex Playground & Tester CLI",
-        "concepts": "Re module, Match Highlighting, Regex Explanation Engine",
-        "category": "Algorithms",
-        "folder": "Day-27-Regex-Tester",
-        "entry": "days/Day-27-Regex-Tester/main.py",
-        "preview": ""
+        "title": "Live ASCII Art Video Streamer",
+        "description": "Real-time video/webcam feed converter transforming frames into animated high-contrast ASCII character mosaic art.",
+        "concepts": "OpenCV, Grayscale Luminance Mapping, Terminal Canvas Rendering",
+        "category": "Computer Vision Art",
+        "folder": "Day-27-ASCII-Art-Streamer",
+        "entry": "days/Day-27-ASCII-Art-Streamer/main.py",
     },
     {
         "day": 28,
-        "title": "Motion Detection & Face Tracking Camera",
-        "concepts": "OpenCV, Haar Cascades, Frame Differencing, Webcam Stream",
+        "title": "Hand Gesture Air Canvas Painter",
+        "description": "Touchless virtual drawing studio using hand tracking and index-finger gestures to paint colored strokes in mid-air.",
+        "concepts": "MediaPipe / OpenCV, Hand Landmarks, Gesture Recognition",
         "category": "Computer Vision & AI",
-        "folder": "Day-28-Motion-Detector",
-        "entry": "days/Day-28-Motion-Detector/main.py",
-        "preview": ""
+        "folder": "Day-28-Air-Canvas-Painter",
+        "entry": "days/Day-28-Air-Canvas-Painter/main.py",
     },
     {
         "day": 29,
-        "title": "Algorithmic Pathfinding Visualizer (A* & Dijkstra)",
-        "concepts": "Graph Theory, Priority Queue, Heuristics, Pygame Grid",
-        "category": "Algorithms & DS",
-        "folder": "Day-29-Pathfinding-Visualizer",
-        "entry": "days/Day-29-Pathfinding-Visualizer/main.py",
-        "preview": ""
+        "title": "3D Wireframe Graphics Engine from Scratch",
+        "description": "Pure Python 3D math engine rendering rotating wireframe cubes, pyramids, and toruses without 3D libraries.",
+        "concepts": "3D Transformation Matrices, Euler Rotations, Perspective Camera",
+        "category": "3D Graphics Engine",
+        "folder": "Day-29-3D-Wireframe-Engine",
+        "entry": "days/Day-29-3D-Wireframe-Engine/main.py",
     },
     {
         "day": 30,
-        "title": "Grand Finale: AI-Powered Autonomous Agent CLI",
-        "concepts": "LLM API Integration, Function Calling, Task Loop, Terminal UI",
-        "category": "Artificial Intelligence",
-        "folder": "Day-30-AI-Agent",
-        "entry": "days/Day-30-AI-Agent/main.py",
-        "preview": ""
-    }
+        "title": "Grand Finale: Neon Cyber Arcade Hub",
+        "description": "Comprehensive arcade game suite uniting custom physics, particle engines, procedural art, and high score dashboards.",
+        "concepts": "Multi-Game Architecture, Particle FX, State Managers, Audio Integration",
+        "category": "Game & Visual Suite",
+        "folder": "Day-30-Cyber-Arcade-Universe",
+        "entry": "days/Day-30-Cyber-Arcade-Universe/main.py",
+    },
 ]
 
 
-def check_day_completion(day_info, repo_root: Path) -> bool:
+def check_day_completion(day_info: dict, repo_root: Path) -> bool:
     """Checks whether code exists for a given day."""
     # Check folder entry
     folder_entry = repo_root / day_info["entry"]
     if folder_entry.exists() and folder_entry.stat().st_size > 0:
         return True
 
-    # Check root day files (e.g. day01_spiral.py or day01.py)
+    # Check days/ directory pattern (e.g. days/Day-01-*/main.py)
     day_num = day_info["day"]
+    days_dir = repo_root / "days"
+    if days_dir.exists():
+        for day_folder in days_dir.glob(f"Day-{day_num:02d}*"):
+            main_file = day_folder / "main.py"
+            if main_file.exists() and main_file.stat().st_size > 0:
+                return True
+
+    # Check root day pattern
     root_pattern = f"day{day_num:02d}*.py"
     matches = list(repo_root.glob(root_pattern))
-    if matches:
+    if matches and any(m.stat().st_size > 0 for m in matches):
         return True
 
     return False
@@ -313,10 +322,10 @@ def generate_progress_bar(completed: int, total: int = 30, width: int = 28) -> s
 
 
 def build_markdown_table(repo_root: Path, completed_count: int) -> str:
-    """Constructs the comprehensive 30-day challenge table."""
+    """Constructs the comprehensive 30-day challenge table without preview/output clutter."""
     headers = [
-        "| Day | Project Title | Key Concepts | Category | Status | Code | Preview |",
-        "| :---: | :--- | :--- | :--- | :---: | :---: | :---: |"
+        "| Day | Project Title | Key Concepts | Category | Status | Code |",
+        "| :---: | :--- | :--- | :--- | :---: | :---: |"
     ]
     rows = []
 
@@ -328,7 +337,6 @@ def build_markdown_table(repo_root: Path, completed_count: int) -> str:
         category = item["category"]
         folder = item["folder"]
         entry = item["entry"]
-        preview = item["preview"]
 
         is_done = check_day_completion(item, repo_root)
 
@@ -336,23 +344,16 @@ def build_markdown_table(repo_root: Path, completed_count: int) -> str:
             status_badge = "`✅ Completed`"
             code_link = f"[Source]({entry})"
             folder_link = f"[{title}](days/{folder})"
-            if preview:
-                label = "View GIF" if preview.lower().endswith(".gif") else "Preview"
-                preview_elem = f"[{label}]({preview})"
-            else:
-                preview_elem = "🖼️ Ready"
         elif day_num == completed_count + 1:
             status_badge = "`⏳ Up Next`"
             folder_link = f"**{title}**"
             code_link = "*(Building)*"
-            preview_elem = "🚀"
         else:
             status_badge = "`🔒 Planned`"
             folder_link = title
             code_link = "—"
-            preview_elem = "—"
 
-        row = f"| **{day_str}** | {folder_link} | `{concepts}` | {category} | {status_badge} | {code_link} | {preview_elem} |"
+        row = f"| **{day_str}** | {folder_link} | `{concepts}` | {category} | {status_badge} | {code_link} |"
         rows.append(row)
 
     return "\n".join(headers + rows)
@@ -401,8 +402,16 @@ def update_readme(repo_root: Path):
     new_table = f"\\1\n{table_str}\n\\3"
     content = re.sub(table_pattern, new_table, content, flags=re.DOTALL)
 
+    # 4. Remove any legacy Day Spotlight section if present
+    content = re.sub(
+        r"## 🌀 Day 01 Spotlight — Infinite Rainbow Spiral.*?(?=## 🗺️ 30-Day Roadmap)",
+        "",
+        content,
+        flags=re.DOTALL
+    )
+
     readme_path.write_text(content, encoding="utf-8")
-    print(f"✅ README.md successfully updated!")
+    print("✅ README.md successfully updated!")
     return True
 
 

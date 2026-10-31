@@ -4,15 +4,22 @@
 Author: Tejas (@Tejas0113)
 
 Usage:
-    python scripts/new_day.py <day_number> "<title>" "<description>" [concepts...]
+    python scripts/new_day.py <day_number>
+    python scripts/new_day.py <day_number> "<title>" ["<description>"] ["<concepts>"]
     
 Example:
-    python scripts/new_day.py 2 "Retro Arcade Snake Game" "Classic arcade snake game in Python" "Pygame, Game Loops, Collision"
+    python scripts/new_day.py 4
+    python scripts/new_day.py 4 "Neon Arcade Pong Game" "Classic 2-player arcade" "Turtle, Pygame, Physics"
 """
 
 import sys
 import subprocess
 from pathlib import Path
+
+# Add scripts directory to sys.path for curriculum import
+scripts_dir = Path(__file__).resolve().parent
+if str(scripts_dir) not in sys.path:
+    sys.path.insert(0, str(scripts_dir))
 
 
 def create_day(day_num: int, title: str, description: str = "", concepts: str = ""):
@@ -76,6 +83,8 @@ if __name__ == "__main__":
 
 ## 🚀 How to Run
 
+From the repository root:
+
 ```bash
 python days/{folder_name}/main.py
 ```
@@ -99,13 +108,33 @@ python days/{folder_name}/main.py
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python scripts/new_day.py <day_number> \"<title>\" [\"<description>\"] [\"<concepts>\"]")
+    if len(sys.argv) < 2:
+        print("Usage:")
+        print("    python scripts/new_day.py <day_number>")
+        print("    python scripts/new_day.py <day_number> \"<title>\" [\"<description>\"] [\"<concepts>\"]")
         sys.exit(1)
 
     day_num = int(sys.argv[1])
-    title = sys.argv[2]
-    desc = sys.argv[3] if len(sys.argv) > 3 else ""
-    concepts = sys.argv[4] if len(sys.argv) > 4 else ""
+
+    if len(sys.argv) == 2:
+        try:
+            from update_tracker import CURRICULUM
+            match = next((item for item in CURRICULUM if item["day"] == day_num), None)
+            if match:
+                title = match["title"]
+                desc = match.get("description", "")
+                concepts = match.get("concepts", "")
+            else:
+                title = f"Project {day_num}"
+                desc = ""
+                concepts = ""
+        except Exception:
+            title = f"Project {day_num}"
+            desc = ""
+            concepts = ""
+    else:
+        title = sys.argv[2]
+        desc = sys.argv[3] if len(sys.argv) > 3 else ""
+        concepts = sys.argv[4] if len(sys.argv) > 4 else ""
 
     create_day(day_num, title, desc, concepts)

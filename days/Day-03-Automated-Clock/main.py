@@ -98,3 +98,4 @@ try:
         time.sleep(0.1)  # Smooth update tick
 except turtle.TerminatorError:
     pass  # Handle graceful window closure
+

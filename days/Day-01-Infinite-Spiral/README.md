@@ -51,14 +51,10 @@ This double-buffering technique allows hundreds of lines to render instantaneous
 
 ## 🚀 How to Run
 
-### Option 1: Direct Execution
+From the repository root:
+
 ```bash
 python days/Day-01-Infinite-Spiral/main.py
-```
-
-### Option 2: From Workspace Root
-```bash
-python day01_spiral.py
 ```
 
 > **Tip:** Close the window or press `Ctrl + C` in the terminal to exit gracefully.

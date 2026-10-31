@@ -5,10 +5,11 @@ import turtle
 random.seed(7)
 
 screen = turtle.Screen()
-screen.setup(800, 480)
+screen.setup(width=1.0, height=1.0)  # Use the full screen
 screen.bgcolor("#12001c")
 screen.title("Python Turtle: Flower Drawing")
-screen.setworldcoordinates(-400, -240, 400, 240)
+screen.setworldcoordinates(-440, -264, 440, 264)
+
 
 t = turtle.Turtle()
 t.speed(0)
