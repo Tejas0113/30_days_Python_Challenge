@@ -37,7 +37,7 @@ CURRICULUM = [
         "day": 3,
         "title": "Animated Analog Clock",
         "description": "Real-time system-synced analog clock with trigonometric hour, minute, and second hand animations.",
-        "concepts": "Turtle Graphics, Time Module, Trigonometric Hand Angles",
+        "concepts": "Tkinter Canvas, Datetime, Trigonometric Hand Angles",
         "category": "GUI & Automation",
         "folder": "Day-03-Automated-Clock",
         "entry": "days/Day-03-Automated-Clock/main.py",

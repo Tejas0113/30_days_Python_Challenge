@@ -1,101 +1,54 @@
-import time
-import turtle
+import math, datetime, tkinter as tk
 
-# Set up the screen
-screen = turtle.Screen()
-screen.title("Day 3: Animated Analog Clock")
-screen.bgcolor("black")
-screen.setup(width=600, height=600)
-screen.tracer(0)  # Turn off automatic screen updates for smooth animation
+class CrimsonClock:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Bloody Red Clock - Glowing White Accents")
+        self.root.geometry("500x500")
+        self.root.configure(bg="#000000")
+        self.root.resizable(False, False)
 
-# Create the clock face drawer
-clock_face = turtle.Turtle()
-clock_face.hideturtle()
-clock_face.speed(0)
-clock_face.color("white")
+        self.canvas = tk.Canvas(root, width=500, height=500, bg="#000000", highlightthickness=0)
+        self.canvas.pack(fill="both", expand=True)
+        self.cx, self.cy, self.r = 250, 250, 200
 
-# Draw clock outer circle
-clock_face.penup()
-clock_face.goto(0, -210)
-clock_face.pendown()
-clock_face.pensize(5)
-clock_face.circle(210)
+        self.draw_face()
+        self.update_clock()
 
-# Draw clock hour markings
-clock_face.penup()
-clock_face.goto(0, 0)
-clock_face.setheading(90)
+    def draw_face(self):
+        # Outer dark rim
+        self.canvas.create_oval(self.cx - self.r - 8, self.cy - self.r - 8, self.cx + self.r + 8, self.cy + self.r + 8, fill="#1e1e24", outline="")
+        # Solid Bloody Red inner face
+        self.canvas.create_oval(self.cx - self.r, self.cy - self.r, self.cx + self.r, self.cy + self.r, fill="#8b0000", outline="")
 
-for _ in range(12):
-    clock_face.forward(190)
-    clock_face.pendown()
-    clock_face.forward(15)
-    clock_face.penup()
-    clock_face.goto(0, 0)
-    clock_face.right(30)
+        # 12 Hour Ticks (Glowing White)
+        for h in range(12):
+            ang = math.radians(h * 30 - 90)
+            x1, y1 = self.cx + (self.r - 35) * math.cos(ang), self.cy + (self.r - 35) * math.sin(ang)
+            x2, y2 = self.cx + (self.r - 5) * math.cos(ang), self.cy + (self.r - 5) * math.sin(ang)
+            # Outer subtle glow line
+            self.canvas.create_line(x1, y1, x2, y2, fill="#ffffff", width=4, capstyle=tk.ROUND)
 
-# Create turtles for clock hands
-sec_hand = turtle.Turtle()
-sec_hand.shape("arrow")
-sec_hand.color("red")
-sec_hand.pensize(2)
+    def update_clock(self):
+        self.canvas.delete("hands")
+        now = datetime.datetime.now()
+        h, m, s = now.hour % 12, now.minute, now.second + now.microsecond / 1e6
 
-min_hand = turtle.Turtle()
-min_hand.shape("arrow")
-min_hand.color("white")
-min_hand.pensize(4)
+        h_ang = math.radians((h + m / 60 + s / 3600) * 30 - 90)
+        m_ang = math.radians((m + s / 60) * 6 - 90)
+        s_ang = math.radians(s * 6 - 90)
 
-hour_hand = turtle.Turtle()
-hour_hand.shape("arrow")
-hour_hand.color("white")
-hour_hand.pensize(6)
+        # Draw glowing white hands (Hour, Minute, Second)
+        for ang, length, width, tail in [(h_ang, 105, 6, 20), (m_ang, 155, 4, 25), (s_ang, 165, 2, 35)]:
+            x1, y1 = self.cx - tail * math.cos(ang), self.cy - tail * math.sin(ang)
+            x2, y2 = self.cx + length * math.cos(ang), self.cy + length * math.sin(ang)
+            self.canvas.create_line(x1, y1, x2, y2, fill="#ffffff", width=width, capstyle=tk.ROUND, tags="hands")
 
-for hand in (sec_hand, min_hand, hour_hand):
-    hand.speed(0)
-    hand.penup()
+        # Glowing white center pin
+        self.canvas.create_oval(self.cx - 6, self.cy - 6, self.cx + 6, self.cy + 6, fill="#ffffff", outline="", tags="hands")
+        self.root.after(50, self.update_clock)
 
-
-def update_clock():
-    # Get current local system time
-    current_time = time.localtime()
-    hrs = current_time.tm_hour % 12
-    mins = current_time.tm_min
-    secs = current_time.tm_sec
-
-    # Calculate angles for hands (0 degrees points straight UP)
-    sec_angle = 90 - (secs * 6)
-    min_angle = 90 - (mins * 6 + secs * 0.1)
-    hour_angle = 90 - (hrs * 30 + mins * 0.5)
-
-    # Position Second Hand
-    sec_hand.goto(0, 0)
-    sec_hand.setheading(sec_angle)
-    sec_hand.forward(170)
-
-    # Position Minute Hand
-    min_hand.goto(0, 0)
-    min_hand.setheading(min_angle)
-    min_hand.forward(140)
-
-    # Position Hour Hand
-    hour_hand.goto(0, 0)
-    hour_hand.setheading(hour_angle)
-    hour_hand.forward(90)
-
-    # Refresh the screen
-    screen.update()
-
-    # Clear hands before redrawing next tick
-    sec_hand.clear()
-    min_hand.clear()
-    hour_hand.clear()
-
-
-# Main animation loop
-try:
-    while True:
-        update_clock()
-        time.sleep(0.1)  # Smooth update tick
-except turtle.TerminatorError:
-    pass  # Handle graceful window closure
-
+if __name__ == "__main__":
+    root = tk.Tk()
+    clock = CrimsonClock(root)
+    root.mainloop()

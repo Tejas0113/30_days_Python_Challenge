@@ -90,7 +90,7 @@ Every single day is structured around building a complete, runnable application 
 | :---: | :--- | :--- | :--- | :---: | :---: |
 | **Day 01** | [Infinite Rainbow Spiral](days/Day-01-Infinite-Spiral) | `Turtle Graphics, HSV Color Space, Frame Buffering` | Generative Art | `✅ Completed` | [Source](days/Day-01-Infinite-Spiral/main.py) |
 | **Day 02** | [Turtle Flower Drawing](days/Day-02-Flower-Drawing) | `Turtle Graphics, Parametric Curves, Spiral Phyllotaxis` | Generative Art | `✅ Completed` | [Source](days/Day-02-Flower-Drawing/main.py) |
-| **Day 03** | [Animated Analog Clock](days/Day-03-Automated-Clock) | `Turtle Graphics, Time Module, Trigonometric Hand Angles` | GUI & Automation | `✅ Completed` | [Source](days/Day-03-Automated-Clock/main.py) |
+| **Day 03** | [Animated Analog Clock](days/Day-03-Automated-Clock) | `Tkinter Canvas, Datetime, Trigonometric Hand Angles` | GUI & Automation | `✅ Completed` | [Source](days/Day-03-Automated-Clock/main.py) |
 | **Day 04** | **Neon Arcade Pong Game** | `Turtle / Pygame, Elastic Collisions, Keyboard Input Binding` | 2D Game Dev | `⏳ Up Next` | *(Building)* |
 | **Day 05** | Procedural Fractal Tree & Forest | `Recursive Algorithms, Branching Angles, Dynamic Color Gradients` | Generative Art | `🔒 Planned` | — |
 | **Day 06** | Retro Snake Arcade | `Grid Coordinates, List Queues, Game Loops, Collision Detection` | 2D Game Dev | `🔒 Planned` | — |
