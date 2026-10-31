@@ -15,7 +15,7 @@
 
   <p align="center">
     <!-- PROGRESS_BADGE_START -->
-<img src="https://img.shields.io/badge/Progress-1%2F30%20(3.3%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-1%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-29-f59e0b?style=for-the-badge" alt="Days Left" />
+<img src="https://img.shields.io/badge/Progress-3%2F30%20(10.0%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-3%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-27-f59e0b?style=for-the-badge" alt="Days Left" />
 <!-- PROGRESS_BADGE_END -->
   </p>
 
@@ -65,7 +65,7 @@ Rather than sticking to textbook theory, every single day focuses on writing sta
 
 <!-- PROGRESS_BAR_START -->
 ```text
-[█░░░░░░░░░░░░░░░░░░░░░░░░░░░] 3.3% (1/30 Days Completed)
+[███░░░░░░░░░░░░░░░░░░░░░░░░░] 10.0% (3/30 Days Completed)
 ```
 <!-- PROGRESS_BAR_END -->
 
@@ -114,9 +114,9 @@ python days/Day-01-Infinite-Spiral/main.py
 | Day | Project Title | Key Concepts | Category | Status | Code | Preview |
 | :---: | :--- | :--- | :--- | :---: | :---: | :---: |
 | **Day 01** | [Infinite Rainbow Spiral](days/Day-01-Infinite-Spiral) | `Turtle Graphics, HSV Color Space, 60 FPS Frame Buffering` | Generative Art | `✅ Completed` | [Source](days/Day-01-Infinite-Spiral/main.py) | [View GIF](assets/day01_animation.gif) |
-| **Day 02** | **Retro Arcade Snake Game** | `Pygame / Turtle, Collision Detection, Event Loop & State` | Game Dev | `⏳ Up Next` | *(Building)* | 🚀 |
-| **Day 03** | Automated Web Scraping Engine | `BeautifulSoup4, Requests, Data Extraction & CSV Pipeline` | Web Automation | `🔒 Planned` | — | — |
-| **Day 04** | Real-time Weather CLI & Visualizer | `REST APIs, Requests, JSON Parsing, Rich Terminal UI` | CLI Tools | `🔒 Planned` | — | — |
+| **Day 02** | [Turtle Flower Drawing](days/Day-02-Flower-Drawing) | `Turtle Graphics, Mathematical Petal Curves, Starfield` | Generative Art | `✅ Completed` | [Source](days/Day-02-Flower-Drawing/main.py) | [Preview](assets/day02_preview.png) |
+| **Day 03** | [Animated Analog Clock](days/Day-03-Automated-Clock) | `Turtle Graphics, Time Module, Trigonometric Hand Angles` | GUI & Automation | `✅ Completed` | [Source](days/Day-03-Automated-Clock/main.py) | 🖼️ Ready |
+| **Day 04** | **Real-time Weather CLI & Visualizer** | `REST APIs, Requests, JSON Parsing, Rich Terminal UI` | CLI Tools | `⏳ Up Next` | *(Building)* | 🚀 |
 | **Day 05** | Advanced Password Vault & Generator | `Cryptography, SHA-256, Fernet, Secure Memory Handling` | Cybersecurity | `🔒 Planned` | — | — |
 | **Day 06** | Bulk File Organizer & Renamer | `OS, Shutil, Pathlib, Regex, File System Manipulation` | Productivity | `🔒 Planned` | — | — |
 | **Day 07** | Markdown to Clean HTML/PDF Converter | `Python-Markdown, Regex Parsing, CSS Ingestion, WeasyPrint` | Document Tools | `🔒 Planned` | — | — |

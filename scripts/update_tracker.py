@@ -25,20 +25,20 @@ CURRICULUM = [
     },
     {
         "day": 2,
-        "title": "Retro Arcade Snake Game",
-        "concepts": "Pygame / Turtle, Collision Detection, Event Loop & State",
-        "category": "Game Dev",
-        "folder": "Day-02-Snake-Game",
-        "entry": "days/Day-02-Snake-Game/main.py",
-        "preview": ""
+        "title": "Turtle Flower Drawing",
+        "concepts": "Turtle Graphics, Mathematical Petal Curves, Starfield",
+        "category": "Generative Art",
+        "folder": "Day-02-Flower-Drawing",
+        "entry": "days/Day-02-Flower-Drawing/main.py",
+        "preview": "assets/day02_preview.png"
     },
     {
         "day": 3,
-        "title": "Automated Web Scraping Engine",
-        "concepts": "BeautifulSoup4, Requests, Data Extraction & CSV Pipeline",
-        "category": "Web Automation",
-        "folder": "Day-03-Web-Scraper",
-        "entry": "days/Day-03-Web-Scraper/main.py",
+        "title": "Animated Analog Clock",
+        "concepts": "Turtle Graphics, Time Module, Trigonometric Hand Angles",
+        "category": "GUI & Automation",
+        "folder": "Day-03-Automated-Clock",
+        "entry": "days/Day-03-Automated-Clock/main.py",
         "preview": ""
     },
     {
@@ -336,7 +336,11 @@ def build_markdown_table(repo_root: Path, completed_count: int) -> str:
             status_badge = "`✅ Completed`"
             code_link = f"[Source]({entry})"
             folder_link = f"[{title}](days/{folder})"
-            preview_elem = f"[View GIF]({preview})" if preview else "🖼️ Ready"
+            if preview:
+                label = "View GIF" if preview.lower().endswith(".gif") else "Preview"
+                preview_elem = f"[{label}]({preview})"
+            else:
+                preview_elem = "🖼️ Ready"
         elif day_num == completed_count + 1:
             status_badge = "`⏳ Up Next`"
             folder_link = f"**{title}**"
