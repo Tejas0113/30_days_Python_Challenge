@@ -15,7 +15,7 @@
 
   <p align="center">
     <!-- PROGRESS_BADGE_START -->
-<img src="https://img.shields.io/badge/Progress-8%2F30%20(26.7%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-8%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-22-f59e0b?style=for-the-badge" alt="Days Left" />
+<img src="https://img.shields.io/badge/Progress-9%2F30%20(30.0%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-9%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-21-f59e0b?style=for-the-badge" alt="Days Left" />
 <!-- PROGRESS_BADGE_END -->
   </p>
 
@@ -67,7 +67,7 @@ Every single day is structured around building a complete, runnable application 
 
 <!-- PROGRESS_BAR_START -->
 ```text
-[███████░░░░░░░░░░░░░░░░░░░░░] 26.7% (8/30 Days Completed)
+[████████░░░░░░░░░░░░░░░░░░░░] 30.0% (9/30 Days Completed)
 ```
 <!-- PROGRESS_BAR_END -->
 
@@ -96,27 +96,27 @@ Every single day is structured around building a complete, runnable application 
 | **Day 06** | [Cosmic Vortex Generative Art](days/Day-06-Cosmic-Vortex) | `Turtle Graphics, HSV Color Space, Geometric Divergence, Procedural Art` | Generative Art | `✅ Completed` | [Source](days/Day-06-Cosmic-Vortex/main.py) |
 | **Day 07** | [Love Art (Parametric Heart Curve)](days/Day-07-Love-Art) | `Turtle Graphics, Parametric Heart Equations, Trigonometry, Coordinate Transformation` | Generative Art | `✅ Completed` | [Source](days/Day-07-Love-Art/main.py) |
 | **Day 08** | [Ganpati Bappa Minimalist Art](days/Day-08-Ganpati-Bappa-Drawing) | `Turtle Graphics, Tangential Arc Splines, Variable Pen Weight, Vector Typography` | Generative Art | `✅ Completed` | [Source](days/Day-08-Ganpati-Bappa-Drawing/main.py) |
-| **Day 09** | **Neon Arcade Pong Game** | `Turtle / Pygame, Elastic Collisions, Keyboard Input Binding` | 2D Game Dev | `⏳ Up Next` | *(Building)* |
-| **Day 10** | Procedural Fractal Tree & Forest | `Recursive Algorithms, Branching Angles, Dynamic Color Gradients` | Generative Art | `🔒 Planned` | — |
-| **Day 11** | Retro Snake Arcade | `Grid Coordinates, List Queues, Game Loops, Collision Detection` | 2D Game Dev | `🔒 Planned` | — |
-| **Day 12** | Conway's Game of Life Simulation | `Cellular Automata, 2D Array Grids, State Evolution Rules` | Simulation | `🔒 Planned` | — |
-| **Day 13** | Interactive Kaleidoscope & Mandala | `Rotational Symmetry, Polar-to-Cartesian Mapping, Event Listeners` | Generative Art | `🔒 Planned` | — |
-| **Day 14** | Flappy Bird Physics Clone | `Gravity & Velocity Vectors, Obstacle Spawning, AABB Hitboxes` | 2D Game Dev | `🔒 Planned` | — |
-| **Day 15** | Gravitational Solar System Simulator | `Newtonian Gravity, Orbital Mechanics, Vector Acceleration` | Physics Simulation | `🔒 Planned` | — |
-| **Day 16** | Matrix Digital Rain Visualizer | `Terminal Buffering, Glyph Streams, Decay Timing` | Visual Effects | `🔒 Planned` | — |
-| **Day 17** | Sorting Algorithm Visualizer | `Sorting Algorithms, Visual Bar Swaps, Algorithmic Complexity` | Algorithm Visualizer | `🔒 Planned` | — |
-| **Day 18** | Double Pendulum Chaos Simulator | `Chaos Theory, Lagrangian Mechanics, Numerical Integration` | Physics Simulation | `🔒 Planned` | — |
-| **Day 19** | Retro Space Invaders Arcade | `Sprite Arrays, Projectile Management, Marching Movement Logic` | 2D Game Dev | `🔒 Planned` | — |
-| **Day 20** | Algorithmic Maze Generator & Solver | `Depth-First Search (DFS), Recursive Backtracking, Graph Traversal` | Algorithm Visualizer | `🔒 Planned` | — |
-| **Day 21** | Particle Fireworks & Sparkle Engine | `Particle Systems, Velocity Decay, Radial Burst Physics` | Particle Systems | `🔒 Planned` | — |
-| **Day 22** | Mandelbrot & Julia Set Fractal Explorer | `Complex Numbers, Escape-Time Formula, Color Paletting` | Mathematical Art | `🔒 Planned` | — |
-| **Day 23** | Audio Spectrum & Beat Visualizer | `Fast Fourier Transform (FFT), Frequency Bins, Dynamic Scaling` | Audio & Signal Processing | `🔒 Planned` | — |
-| **Day 24** | Elastic Balls Collision Physics Sandbox | `2D Vector Math, Elastic Collision Response, Momentum Conservation` | Physics Simulation | `🔒 Planned` | — |
-| **Day 25** | 2D Raycasting Pseudo-3D Engine | `Raycasting, DDA Algorithm, Field of View (FOV), Wall Slicing` | Graphics Engine | `🔒 Planned` | — |
-| **Day 26** | A* & Dijkstra Pathfinding Visualizer | `A* Search, Dijkstra Algorithm, Priority Queues, Manhattan Distance` | Algorithm Visualizer | `🔒 Planned` | — |
-| **Day 27** | Interactive Water Ripple Wave Sandbox | `Discrete Wave Equation, Velocity Damping, Surface Disturbance` | Physics Simulation | `🔒 Planned` | — |
-| **Day 28** | Classic Asteroids Vector Space Combat | `Angular Momentum, Toroidal Screen Wrap, Polygonal Splitting` | 2D Game Dev | `🔒 Planned` | — |
-| **Day 29** | Cyberpunk Digital Synth & Piano | `Audio Synthesis, Sine Waves, GUI Keypress Binding` | GUI & Audio | `🔒 Planned` | — |
+| **Day 09** | [Happy Dhanteras Animated Poster](days/Day-09-Happy-Dhanteras) | `Turtle Graphics, Cubic Bézier Curves, Particle Systems, Sinusoidal Oscillations` | Generative Art | `✅ Completed` | [Source](days/Day-09-Happy-Dhanteras/main.py) |
+| **Day 10** | **Neon Arcade Pong Game** | `Turtle / Pygame, Elastic Collisions, Keyboard Input Binding` | 2D Game Dev | `⏳ Up Next` | *(Building)* |
+| **Day 11** | Procedural Fractal Tree & Forest | `Recursive Algorithms, Branching Angles, Dynamic Color Gradients` | Generative Art | `🔒 Planned` | — |
+| **Day 12** | Retro Snake Arcade | `Grid Coordinates, List Queues, Game Loops, Collision Detection` | 2D Game Dev | `🔒 Planned` | — |
+| **Day 13** | Conway's Game of Life Simulation | `Cellular Automata, 2D Array Grids, State Evolution Rules` | Simulation | `🔒 Planned` | — |
+| **Day 14** | Interactive Kaleidoscope & Mandala | `Rotational Symmetry, Polar-to-Cartesian Mapping, Event Listeners` | Generative Art | `🔒 Planned` | — |
+| **Day 15** | Flappy Bird Physics Clone | `Gravity & Velocity Vectors, Obstacle Spawning, AABB Hitboxes` | 2D Game Dev | `🔒 Planned` | — |
+| **Day 16** | Gravitational Solar System Simulator | `Newtonian Gravity, Orbital Mechanics, Vector Acceleration` | Physics Simulation | `🔒 Planned` | — |
+| **Day 17** | Matrix Digital Rain Visualizer | `Terminal Buffering, Glyph Streams, Decay Timing` | Visual Effects | `🔒 Planned` | — |
+| **Day 18** | Sorting Algorithm Visualizer | `Sorting Algorithms, Visual Bar Swaps, Algorithmic Complexity` | Algorithm Visualizer | `🔒 Planned` | — |
+| **Day 19** | Double Pendulum Chaos Simulator | `Chaos Theory, Lagrangian Mechanics, Numerical Integration` | Physics Simulation | `🔒 Planned` | — |
+| **Day 20** | Retro Space Invaders Arcade | `Sprite Arrays, Projectile Management, Marching Movement Logic` | 2D Game Dev | `🔒 Planned` | — |
+| **Day 21** | Algorithmic Maze Generator & Solver | `Depth-First Search (DFS), Recursive Backtracking, Graph Traversal` | Algorithm Visualizer | `🔒 Planned` | — |
+| **Day 22** | Particle Fireworks & Sparkle Engine | `Particle Systems, Velocity Decay, Radial Burst Physics` | Particle Systems | `🔒 Planned` | — |
+| **Day 23** | Mandelbrot & Julia Set Fractal Explorer | `Complex Numbers, Escape-Time Formula, Color Paletting` | Mathematical Art | `🔒 Planned` | — |
+| **Day 24** | Audio Spectrum & Beat Visualizer | `Fast Fourier Transform (FFT), Frequency Bins, Dynamic Scaling` | Audio & Signal Processing | `🔒 Planned` | — |
+| **Day 25** | Elastic Balls Collision Physics Sandbox | `2D Vector Math, Elastic Collision Response, Momentum Conservation` | Physics Simulation | `🔒 Planned` | — |
+| **Day 26** | 2D Raycasting Pseudo-3D Engine | `Raycasting, DDA Algorithm, Field of View (FOV), Wall Slicing` | Graphics Engine | `🔒 Planned` | — |
+| **Day 27** | A* & Dijkstra Pathfinding Visualizer | `A* Search, Dijkstra Algorithm, Priority Queues, Manhattan Distance` | Algorithm Visualizer | `🔒 Planned` | — |
+| **Day 28** | Interactive Water Ripple Wave Sandbox | `Discrete Wave Equation, Velocity Damping, Surface Disturbance` | Physics Simulation | `🔒 Planned` | — |
+| **Day 29** | Classic Asteroids Vector Space Combat | `Angular Momentum, Toroidal Screen Wrap, Polygonal Splitting` | 2D Game Dev | `🔒 Planned` | — |
 | **Day 30** | Grand Finale: 3D Wireframe Engine & Cyber Arcade | `3D Transformation Matrices, Particle FX, Multi-Game Engine` | 3D Graphics & Games | `🔒 Planned` | — |
 <!-- CHALLENGE_TABLE_END -->
 
