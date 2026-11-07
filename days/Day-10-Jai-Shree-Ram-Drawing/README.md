@@ -29,16 +29,16 @@ Implemented in 100% pure standard Python using `turtle`, the program animates a 
 
 ### 1. Vector Stroke Extraction & RDP Simplification
 The artwork is discretized into continuous vector polylines extracted from the sacred iconography:
-- **Ramer-Douglas-Peucker (RDP) Algorithm**: Simplifies dense pixel contours by recursively discarding points with perpendicular distance less than $\epsilon = 1.0\text{ px}$:
+- **Ramer-Douglas-Peucker (RDP) Algorithm**: Simplifies dense pixel contours by recursively discarding points with perpendicular distance less than $\epsilon = 0.9\text{ px}$:
 
   $$\mathbf{d}(P, AB) = \frac{|\vec{AB} \times \vec{AP}|}{|\vec{AB}|}$$
 
-- This compresses tens of thousands of coordinate entries into 529 smooth, topologically continuous stroke paths totaling 5,845 vector points without losing fine details like the arrow feathers, tilak, or eye contours.
+- This compresses tens of thousands of coordinate entries into 470 smooth, topologically continuous stroke paths totaling 7,638 vector points without losing fine details like the arrow feathers, tilak, or eye contours.
+- **Anatomical Layer Ordering**: Instead of arbitrary scanlines, strokes are grouped and sequenced naturally: Hair Bun (*Jata*) $\to$ Divine Face & Tilak $\to$ Flowing Hair Locks $\to$ Kodanda Bow & String $\to$ Tarkash Quiver of Arrows $\to$ Chest & Sacred Drapery.
 
-### 2. Zero-Dependency In-Memory Vector Packaging
-To ensure that `main.py` runs instantly on any machine without requiring OpenCV (`cv2`) or missing external image files:
-- The vector stroke data is compressed using standard `zlib` and `base64`.
-- The 22 KB payload is embedded directly into the script and dynamically decompressed in under 1 millisecond into Turtle-ready floating-point coordinates.
+### 2. Dual-Layer Neon Glow & Zero-Dependency In-Memory Packaging
+- **Dual-Layer Neon Glow**: Rendered in two coordinated passes—a thicker warm amber under-layer (`#B85412`, pensize 3) followed by a high-luminance saffron-gold core (`#FFA228`, pensize 2)—creating the radiant neon halo seen on OLED screens.
+- **Zero-Dependency Runtime**: The vector stroke data is compressed using standard `zlib` and `base64` (27 KB payload), dynamically decompressed at launch with 0 external dependencies (no OpenCV or NumPy required).
 
 ### 3. Saffron-Gold Palette & Night Contrast
 - **Sacred Saffron & Gold (`#FF9933`, `#FFA028`, `#FFD700`)**: Symbolizes divine radiance, spiritual strength, and auspiciousness.
@@ -69,3 +69,4 @@ python days/Day-10-Jai-Shree-Ram-Drawing/main.py
 <p align="center">
   <a href="../../README.md"><b>⬅️ Return to 30 Days Challenge Tracker</b></a>
 </p>
+
