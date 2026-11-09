@@ -1,17 +1,33 @@
-from turtle import setworldcoordinates
-from turtle import *
+import colorsys as sm
+import turtle as r
 
-# Set up the screen dimensions (width, height)
-setworldcoordinates(450, -450,450,-450)
+# Maximize render speed
+r.tracer(0, 0)
+r.speed(0)
+r.hideturtle()
+r.bgcolor("black")
+r.pensize(2)
 
-# Initialize settings
-speed(0)  # Maximum drawing speed
-bgcolor("white")  # Optional background color
+h = 0
+n = 400  # Number of overlapping layers
 
-# Draw the spiral pattern
-for i in range(50):
-    circle(100, 360)
-    left(5)
+for i in range(n):
+  for j in range(4):
+    # Keep 'h' strictly between 0.0 and 1.0 using modulo
+    c = sm.hsv_to_rgb(h % 1.0, 1, 1)
+    h += 0.0025  # Smooth, gradual color shift
+    r.color(c)
 
-# Keep the window open until clicked
-done()
+    # Scale the shapes outward to create the expanding overlap
+    r.circle(30 + (i * 0.3) + (j * 4), 90)
+    r.forward(80 + (i * 0.1))
+    r.left(90)
+
+  # Adjust rotation to form the tight, curved loop
+  r.right(11)
+
+  if i % 5 == 0:
+    r.update()
+
+r.update()
+r.done()
