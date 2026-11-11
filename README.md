@@ -15,7 +15,7 @@
 
   <p align="center">
     <!-- PROGRESS_BADGE_START -->
-<img src="https://img.shields.io/badge/Progress-12%2F30%20(40.0%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-12%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-18-f59e0b?style=for-the-badge" alt="Days Left" />
+<img src="https://img.shields.io/badge/Progress-13%2F30%20(43.3%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-13%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-17-f59e0b?style=for-the-badge" alt="Days Left" />
 <!-- PROGRESS_BADGE_END -->
   </p>
 
@@ -67,7 +67,7 @@ Every single day is structured around building a complete, runnable application 
 
 <!-- PROGRESS_BAR_START -->
 ```text
-[███████████░░░░░░░░░░░░░░░░░] 40.0% (12/30 Days Completed)
+[████████████░░░░░░░░░░░░░░░░] 43.3% (13/30 Days Completed)
 ```
 <!-- PROGRESS_BAR_END -->
 
@@ -100,8 +100,8 @@ Every single day is structured around building a complete, runnable application 
 | **Day 10** | [Lord Shri Ram Sketch & Happy Diwali](days/Day-10-Jai-Shree-Ram-Drawing) | `Turtle Graphics, Vector Stroke Extraction, RDP Simplification, Embedded Data` | Generative Art | `✅ Completed` | [Source](days/Day-10-Jai-Shree-Ram-Drawing/main.py) |
 | **Day 11** | [Chromatic Circle Spiral Art](days/Day-11-Circle spiral) | `Turtle Graphics, HSV Color Space, Geometric Precession, Screen Buffering` | Generative Art | `✅ Completed` | [Source](days/Day-11-Circle spiral/main.py) |
 | **Day 12** | [Lord Shree Ram & Hanuman Ji Divine Art](days/Day-12-Shree-Ram-Hanuman-Divine-Art) | `Pygame, OpenCV, Canny Edge Detection, Connected Components, Polar Sunburst` | Generative Art | `✅ Completed` | [Source](days/Day-12-Shree-Ram-Hanuman-Divine-Art/main.py) |
-| **Day 13** | **Retro Snake Arcade** | `Grid Coordinates, List Queues, Game Loops, Collision Detection` | 2D Game Dev | `⏳ Up Next` | *(Building)* |
-| **Day 14** | Conway's Game of Life Simulation | `Cellular Automata, 2D Array Grids, State Evolution Rules` | Simulation | `🔒 Planned` | — |
+| **Day 13** | [Cosmic Universe Generative Painting](days/Day-13-Cosmic-Universe) | `Pygame, OpenCV, Multi-Scale Blur, Sobel Ridge Flow, Diffraction Optics` | Generative Art | `✅ Completed` | [Source](days/Day-13-Cosmic-Universe/main.py) |
+| **Day 14** | **Conway's Game of Life Simulation** | `Cellular Automata, 2D Array Grids, State Evolution Rules` | Simulation | `⏳ Up Next` | *(Building)* |
 | **Day 15** | Interactive Kaleidoscope & Mandala | `Rotational Symmetry, Polar-to-Cartesian Mapping, Event Listeners` | Generative Art | `🔒 Planned` | — |
 | **Day 16** | Flappy Bird Physics Clone | `Gravity & Velocity Vectors, Obstacle Spawning, AABB Hitboxes` | 2D Game Dev | `🔒 Planned` | — |
 | **Day 17** | Gravitational Solar System Simulator | `Newtonian Gravity, Orbital Mechanics, Vector Acceleration` | Physics Simulation | `🔒 Planned` | — |

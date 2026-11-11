@@ -125,12 +125,12 @@ CURRICULUM = [
     },
     {
         "day": 13,
-        "title": "Retro Snake Arcade",
-        "description": "Iconic arcade snake game featuring grid movement, dynamic food spawning, score tracking, and tail collision.",
-        "concepts": "Grid Coordinates, List Queues, Game Loops, Collision Detection",
-        "category": "2D Game Dev",
-        "folder": "Day-13-Retro-Snake",
-        "entry": "days/Day-13-Retro-Snake/main.py",
+        "title": "Cosmic Universe Generative Painting",
+        "description": "Volumetric generative digital painting simulation featuring multi-scale gas washes, Sobel ridge sculpting, exact pixel convergence, and 4-point stellar ignition.",
+        "concepts": "Pygame, OpenCV, Multi-Scale Blur, Sobel Ridge Flow, Diffraction Optics",
+        "category": "Generative Art",
+        "folder": "Day-13-Cosmic-Universe",
+        "entry": "days/Day-13-Cosmic-Universe/main.py",
     },
     {
         "day": 14,
