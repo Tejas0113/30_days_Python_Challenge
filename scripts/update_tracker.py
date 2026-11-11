@@ -134,12 +134,12 @@ CURRICULUM = [
     },
     {
         "day": 14,
-        "title": "Conway's Game of Life Simulation",
-        "description": "Interactive cellular automata grid simulation modeling birth, survival, and death patterns (gliders, pulsars).",
-        "concepts": "Cellular Automata, 2D Array Grids, State Evolution Rules",
-        "category": "Simulation",
-        "folder": "Day-14-Conways-Game-of-Life",
-        "entry": "days/Day-14-Conways-Game-of-Life/main.py",
+        "title": "Interactive Spider Web on a Building Corner",
+        "description": "Architectural scene with procedural concrete walls and a realistic catenary-curved spider web with dynamic mouse proximity opacity, breeze physics, and silk tension.",
+        "concepts": "Pygame, Catenary Curves, Alpha Compositing, Air Current Physics, Architectural Perspective",
+        "category": "Generative Art",
+        "folder": "Day-14-Spider-Web",
+        "entry": "days/Day-14-Spider-Web/main.py",
     },
     {
         "day": 15,
