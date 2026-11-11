@@ -1,4 +1,4 @@
-# 🌌 Day 13: Cosmic Universe - Generative Digital Painting & Stellar Ignition
+# 🌌 Day 13: Cosmic Universe - Fine Pencil Hatching Simulation & Stellar Ignition
 
 > **30 Days of Python Challenge** · Level Up Your Python Skills  
 > Created by **[@Tejas0113](https://github.com/Tejas0113)**
@@ -6,49 +6,53 @@
 ---
 
 <p align="center">
-  <img src="../../assets/day13_animation.gif" alt="Cosmic Universe Generative Painting Animation Preview" width="640px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(120, 230, 255, 0.4);" />
+  <img src="../../assets/day13_animation.gif" alt="Cosmic Universe Fine Pencil Hatching Drawing Animation" width="640px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(120, 230, 255, 0.4);" />
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Completed%20%E2%9C%85-brightgreen?style=for-the-badge" alt="Status" />
   <img src="https://img.shields.io/badge/Language-Python%203.10%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/Category-Generative%20Art%20%26%20Volumetric%20Painting-00f0ff?style=for-the-badge" alt="Category" />
+  <img src="https://img.shields.io/badge/Category-Generative%20Art%20%26%20Pencil%20Simulation-00f0ff?style=for-the-badge" alt="Category" />
 </p>
 
 ---
 
 ## 📖 Overview
 
-Day 13 brings an authentic, hypnotic generative painting experience: **Cosmic Universe - Generative Digital Painting & Stellar Ignition**.
+Day 13 brings an authentic, satisfying colored-pencil drawing simulation: **Cosmic Universe - Fine Pencil Hatching Simulation & Stellar Ignition**.
 
-The program simulates the steady, organic brushwork of a digital master artist, slowly bringing the entire celestial masterpiece to life in a 60 FPS hardware-accelerated Pygame window:
-1. **Clean Cosmic Void Inception**: Begins in a deep interstellar space canvas (`#050610`) populated by subtle ambient stars.
-2. **Organic Celestial Brush Trajectory**: A glowing celestial stylus (white core + warm golden corona) glides smoothly across the canvas in rhythmic, undulating sweeps, progressively painting the exact, saturated colors of the nebula.
-3. **Zero Noise, 100% Exact High-Fidelity Convergence**: Every single stroke reveals the pristine master artwork—from the emerald-turquoise clouds on the left to the radiant azure valley, rose-magenta stellar nursery, and fiery golden cosmic cliffs along the horizon. No noise, no blur, no missed details.
-4. **Stellar Birth & Diffraction Flare Ignition**: As the painting nears completion, the prominent stars ignite in sequence—featuring the iconic 4-point golden cross star in the lower-left with radiating horizontal and vertical diffraction spikes, the upper golden star, and the cyan nursery core.
-5. **Living Cosmos Interactive Mode**: Once painted, the universe remains alive with gentle stellar twinkling, breathing incandescent core flares, and real-time interactive stardust that responds to cursor movement.
+The application models an artist's colored pencil drawing the entire celestial masterpiece steadily from corner to corner:
+1. **Corner-to-Corner Diagonal Hatching**: Drawing begins precisely at the top-left corner `(0, 0)` in deep interstellar space, sweeping in continuous back-and-forth diagonal hatching bands ($x + y = d$) across 641 diagonals to reach the opposite corner `(1280, 640)`.
+2. **Authentic Pencil Size**: Employs a fine pencil nib ($\sim 3\text{--}4\text{ px}$ width) mimicking traditional colored-pencil shading time-lapses.
+3. **Ergonomic Colored Pencil Stylus**: A visible vector pencil leads the drawing frontier at a natural $50^\circ$ angle:
+   - Dynamic lead tip reflecting the exact cosmic pigment at the active coordinate.
+   - Sharpened cedar wood collar and 3D-shaded hexagonal barrel with golden ferrule.
+   - Graphite and stardust micro-particles emitting from the contact point.
+4. **Zero Noise, 100% Exact High-Fidelity Reproduction**: Every single stroke renders the exact master artwork—emerald nebula pillars, radiant azure core, magenta clouds, and golden cosmic cliffs along the horizon. Zero blur, zero digital static.
+5. **Stellar Birth & Diffraction Flare Ignition**: As the drawing nears completion ($\ge 80\%$), prominent star cores ignite with astronomical 4-point cross diffraction spikes (JWST Carina Nebula style).
+6. **Living Cosmos Interactive Mode**: Once complete, the universe remains alive with gentle stellar twinkling and real-time interactive stardust that responds to cursor movement.
 
 ---
 
 ## 🧠 Concepts & Mathematical Mechanics
 
-### 1. Multi-Scale Volumetric Gaussian Pyramid Blur Decomposition
-Atmospheric nebula clouds possess multi-scale spatial characteristics. The reference image $I_0$ is decomposed into a pyramid of Gaussian-blurred representations:
+### 1. Diagonal Zig-Zag Hatching Manifold ($x + y = d$)
+To simulate continuous human hand hatching, the canvas is parameterized by diagonal level sets:
 
-$$I_\sigma(x, y) = I_0(x, y) * G_\sigma(x, y), \quad \text{where } G_\sigma(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}$$
+$$d = x + y, \quad d \in [0, W + H]$$
 
-- **Coarse Atmospheric Map ($\sigma = 32$)**: Guides large orbital wash strokes (radius $45\text{--}90\text{ px}$) during early cloud inception.
-- **Medium Texture Map ($\sigma = 10$)**: Supplies volumetric density for the billowing pillars.
-- **Master Fidelity Map ($\sigma = 0$)**: Guarantees zero loss of high-frequency micro-features during the final convergence phase.
+For each diagonal band $d$ spaced by pencil width $\Delta d = 3\text{ px}$:
+- Bounding coordinate range: $x_{\min} = \max(0, d - H)$, $x_{\max} = \min(W, d)$
+- Trajectory orientation alternates per band $i$:
+  $$\mathbf{x}(s) = \begin{cases} (1 - s) x_{\min} + s\, x_{\max}, & i \text{ is even} \\ (1 - s) x_{\max} + s\, x_{\min}, & i \text{ is odd} \end{cases}$$
+- This guarantees a continuous, unbroken zig-zag path spanning 154,250 points from $(0, 0)$ to $(W, H)$ with 100% pixel coverage and zero gaps.
 
-### 2. 2D Sobel Directional Gradient Ridge Sculpting
-To paint clouds and ridges naturally, brush strokes must align with the physical flow of the gas contours. First-order Sobel derivatives calculate spatial gradient vectors:
+### 2. Micro-Patch High-Fidelity Sampling
+At each pencil tip coordinate $(x, y)$, a localized nib patch is transferred from the high-resolution master surface:
 
-$$G_x = \begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix} * I, \quad G_y = \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1 \end{bmatrix} * I$$
+$$\Omega_{\text{pencil}}(x, y) = [x - R, x + R] \times [y - R, y + R], \quad R = 2\text{ px}$$
 
-$$\|\nabla I\| = \sqrt{G_x^2 + G_y^2}, \quad \theta = \operatorname{atan2}(G_y, G_x) + \frac{\pi}{2}$$
-
-Brush strokes are oriented tangentially along $\theta$ with stroke length modulated by gradient magnitude $\|\nabla I\|$, reproducing the natural, turbulent swirls of cosmic dust clouds.
+Because $\Delta s \le R$, consecutive pencil stamps overlap smoothly, producing solid, vibrant colored pencil strokes without digital artifacts or noise.
 
 ### 3. Astronomical 4-Point Diffraction Spike Optics
 Prominent stars exhibit diffraction spikes caused by the spider vanes of astronomical telescopes. These are modeled mathematically using linear intensity decays with core Gaussian bloom:
@@ -60,9 +64,9 @@ Rendered with central luminous white discs, golden outer halos ($R \approx 20\te
 ### 4. Harmonic Stellar Twinkle Physics
 In the Living Cosmos phase, stars shimmer organically using sinusoidal phase shifts:
 
-$$r_{\text{eff}}(t) = r_0 \left(1.0 + 0.28 \sin\left(\omega t + \phi_k\right)\right), \quad \phi_k \sim \mathcal{U}(0, 2\pi)$$
+$$r_{\text{eff}}(t) = r_0 \left(1.0 + 0.16 \sin\left(\omega t + \phi_k\right)\right), \quad \phi_k \sim \mathcal{U}(0, 2\pi)$$
 
-preventing uniform blinking and delivering a natural, breathing night sky.
+delivering a natural, breathing night sky.
 
 ---
 
@@ -71,9 +75,8 @@ preventing uniform blinking and delivering a natural, breathing night sky.
 - **Language**: Python 3.10+
 - **Core Libraries**:
   - `pygame` / `pygame-ce` — 60 FPS hardware-accelerated rendering, alpha compositing, and user interaction.
-  - `opencv-python-headless` — Bilateral filtering, multi-scale Gaussian blurring, and Sobel gradient field extraction.
-  - `numpy` — Fast array operations, surface transposed coordinate buffers, and polar transformations.
-  - `pillow` — Lanczos resampling and high-res asset exports.
+  - `numpy` — Fast array operations, surface transposed coordinate buffers, and brightness analysis.
+  - `pillow` — Lanczos resampling and preview asset exports.
 
 ---
 
@@ -89,15 +92,18 @@ python days/Day-13-Cosmic-Universe/main.py
 
 | Input | Action |
 | :---: | :--- |
-| **Mouse Move** | Spawns interactive glowing stardust that drifts across the cosmos |
-| **`[SPACE]`** | Replays the slow generative painting sequence from scratch |
-| **`[S]`** | Saves a high-resolution screenshot (`cosmic_universe_screenshot.png`) |
-| **`[F]`** | Toggles fullscreen mode |
-| **`[ESC]` / `[Q]`** | Exits application cleanly |
+| **`[SPACE]`** | Pause / Resume pencil drawing animation |
+| **`[R]`** | Restart drawing from corner `(0, 0)` |
+| **`[+]` / `[UP]`** | Increase pencil drawing speed (+30 pts/frame) |
+| **`[-]` / `[DOWN]`** | Decrease pencil drawing speed (-30 pts/frame) |
+| **`[1]` - `[4]`** | Preset speeds (1: Slow, 2: Standard, 3: Quick, 4: Hyper-lapse) |
+| **`[S]`** | Save high-resolution screenshot (`cosmic_universe_screenshot.png`) |
+| **`[F]`** | Toggle fullscreen mode |
+| **`[ESC]` / `[Q]`** | Exit application cleanly |
+| **Mouse Move** | Interactive luminous stardust particles drift across canvas |
 
 ---
 
 <p align="center">
   <a href="../../README.md"><b>⬅️ Return to 30 Days Challenge Tracker</b></a>
 </p>
-
