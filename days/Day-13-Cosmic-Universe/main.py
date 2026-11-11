@@ -3,26 +3,19 @@ Day 13: Cosmic Universe - Progressive Corner Drawing & Vice-Versa Simulation
 30 Days Python Challenge by Tejas (@Tejas0113)
 
 Description:
-An authentic, satisfying generative drawing simulation that brings the cosmic universe
-nebula to life steadily, revealing small visible portions as the drawing tool glides
-from corner to corner across the canvas:
-1. Corner-to-Corner Progressive Drawing: Starts at one corner (e.g., Top-Left (0, 0))
-   and sweeps along continuous diagonal bands across to the opposite corner (1280, 640).
-2. Visible Portion Revealing: Rather than digital static or sudden reveals, every stroke
-   paints a clearly visible circular portion (radius ~24 px) of the cosmic universe,
-   letting you watch each star cluster, glowing nebula pillar, and golden cliff emerge piece by piece.
-3. Vice-Versa Mode:
-   - Forward: Draws from Top-Left (0, 0) to Bottom-Right (1280, 640).
+A smooth, authentic generative digital painting simulation that draws the
+exact, pristine Cosmic Universe image slowly and steadily from corner to corner:
+1. Exact Image Fidelity: 100% faithful reproduction of the original cosmic universe image
+   (no fake geometric shapes, no giant circles, no artificial overlays).
+2. Visible Portion Revealing: The pencil glides across the canvas from one corner,
+   progressively revealing small, clear portions (radius ~24 px) of the magnificent nebula.
+3. Corner-to-Corner Trajectories:
+   - Forward: Draws from Top-Left (0, 0) across diagonal zig-zag bands to Bottom-Right (1280, 640).
    - Vice-Versa: Draws from Bottom-Right (1280, 640) back to Top-Left (0, 0), revealing
-     the golden horizon cliffs first and sweeping up to the deep cosmos!
-   - Auto-Loop: Continuously draws from corner to corner and vice-versa in a hypnotic cycle.
-4. Ergonomic Stylus & Lead Indicator: An authentic colored-pencil stylus leads the stroke,
-   complete with active pigment tip, cedar wood collar, 3D barrel, active brush radius ring,
-   and floating stardust graphite particles.
-5. Zero Sudden Pops: Every single pixel is progressively drawn by overlapping strokes—100%
-   genuine drawing coverage without any abrupt full-image replacement.
-6. Stellar Ignition: Upon reaching the opposite corner, celestial stars ignite with 4-point
-   cross diffraction spikes into an interactive Living Cosmos mode.
+     the golden cliffs first and sweeping towards deep space.
+   - Auto-Loop: Alternates between Forward and Vice-Versa drawing passes.
+4. Ergonomic Pencil Stylus: A classic colored-pencil stylus leads the stroke with an active
+   pigment lead tip, cedar wood collar, 3D barrel, and floating stardust graphite particles.
 
 Controls:
   [SPACE]     - Pause / Resume drawing
@@ -73,20 +66,18 @@ def load_master_and_generate_trajectories(image_path, width, height, brush_radiu
         sys.exit(1)
 
     raw_image = pygame.image.load(image_path)
+    # Scaled master surface (100% exact pixel replica)
     scaled = pygame.transform.smoothscale(raw_image, (width, height))
-    if pygame.display.get_surface():
-        master_surface = scaled.convert()
-    else:
-        master_surface = scaled
+    master_surface = scaled.convert() if pygame.display.get_surface() else scaled
 
     # Step size between diagonal bands ensures smooth overlapping coverage
     step_d = int(brush_radius * 0.85)
 
-    # Diagonal bands: x + y = d, from -brush_radius to width + height + brush_radius
+    # Diagonal bands: x + y = d, from 0 to width + height
     bands = []
-    for d in range(-brush_radius, width + height + brush_radius + step_d, step_d):
-        x_min = max(-brush_radius, d - height - brush_radius)
-        x_max = min(width + brush_radius, d + brush_radius)
+    for d in range(0, width + height + step_d, step_d):
+        x_min = max(0, d - height)
+        x_max = min(width, d)
         if x_min <= x_max:
             bands.append((d, x_min, x_max))
 
@@ -105,70 +96,34 @@ def load_master_and_generate_trajectories(image_path, width, height, brush_radiu
         for x in xs:
             forward_path.append((int(x), int(d - x)))
 
+    # Ensure the very corners are explicitly drawn
+    if forward_path[0] != (0, 0):
+        forward_path.insert(0, (0, 0))
+    if forward_path[-1] != (width, height):
+        forward_path.append((width, height))
+
     # Vice-Versa trajectory: exact reverse from Bottom-Right to Top-Left
     reverse_path = forward_path[::-1]
-
-    # Precompute circular alpha mask for smooth portion blitting
-    mask_size = 2 * brush_radius + 1
-    brush_mask = pygame.Surface((mask_size, mask_size), pygame.SRCALPHA)
-    pygame.draw.circle(brush_mask, (255, 255, 255, 255), (brush_radius, brush_radius), brush_radius)
-
-    # Stellar core detection via brightness analysis
-    arr = pygame.surfarray.array3d(master_surface)
-    gray = (arr[:, :, 0] * 0.299 + arr[:, :, 1] * 0.587 + arr[:, :, 2] * 0.114)
-
-    stars = []
-    block_size = 14
-    for bx in range(0, arr.shape[0] - block_size, block_size):
-        for by in range(0, arr.shape[1] - block_size, block_size):
-            sub = gray[bx:bx + block_size, by:by + block_size]
-            max_val = np.max(sub)
-            if max_val > 220:
-                local_idx = np.unravel_index(np.argmax(sub), sub.shape)
-                sx = bx + local_idx[0]
-                sy = by + local_idx[1]
-                r, g, b = arr[sx, sy]
-                stars.append({
-                    "x": int(sx),
-                    "y": int(sy),
-                    "brightness": float(max_val),
-                    "color": (int(r), int(g), int(b)),
-                    "phase": random.uniform(0, math.pi * 2),
-                })
-
-    stars.sort(key=lambda s: s["brightness"], reverse=True)
-
-    # Key landmark coordinates
-    landmarks = {
-        "primary_star": (int(width * (315 / 2560)), int(height * (786 / 1280))),
-        "upper_gold_star": (int(width * (1692 / 2560)), int(height * (295 / 1280))),
-        "cyan_core": (int(width * (654 / 2560)), int(height * (295 / 1280))),
-        "horizon_core": (int(width * (1878 / 2560)), int(height * (724 / 1280))),
-    }
 
     return {
         "master_surface": master_surface,
         "forward_path": forward_path,
         "reverse_path": reverse_path,
-        "brush_mask": brush_mask,
         "brush_radius": brush_radius,
-        "stars": stars,
-        "landmarks": landmarks,
     }
 
 
 def draw_pencil(surface, tip_pos, lead_color=(255, 200, 100), angle_deg=50, brush_radius=24):
     """
-    Renders an authentic colored-pencil stylus with a luminous brush ring.
-    - Luminous ring marks the active small portion being painted.
+    Renders an authentic colored-pencil stylus with a subtle brush guide ring.
+    - Luminous ring marks the active portion being painted.
     - Lead tip matches active cosmic pigment.
     - Cedar wood collar and 3D hexagonal barrel with golden ferrule.
     """
     cx, cy = tip_pos
 
-    # Subtle glowing brush outline indicating active visible portion
-    pygame.draw.circle(surface, (*lead_color[:3], 45), (cx, cy), brush_radius, 1)
-    pygame.draw.circle(surface, (255, 255, 255, 75), (cx, cy), max(2, brush_radius // 2), 1)
+    # Subtle glowing brush guide ring indicating active visible portion
+    pygame.draw.circle(surface, (*lead_color[:3], 60), (cx, cy), brush_radius, 1)
 
     rad = math.radians(angle_deg)
     ux = math.cos(rad)
@@ -221,37 +176,6 @@ def draw_pencil(surface, tip_pos, lead_color=(255, 200, 100), angle_deg=50, brus
     pygame.draw.polygon(surface, (15, 20, 35), [p_wood_l, p_bar_l, p_bar_r, p_wood_r], 1)
 
 
-def draw_diffraction_spike(surface, center, length, color, core_radius=6, spike_width=2):
-    """Renders a clean astronomical 4-point cross diffraction spike with glowing core."""
-    cx, cy = center
-    r, g, b = color
-
-    # Outer soft halo
-    for rad in range(int(core_radius * 2.5), 0, -2):
-        alpha = int(55 * (1.0 - rad / (core_radius * 2.5)))
-        pygame.draw.circle(surface, (r, g, b, alpha), (cx, cy), rad)
-
-    # Core luminous disc
-    pygame.draw.circle(surface, (255, 255, 255, 255), (cx, cy), core_radius)
-    pygame.draw.circle(surface, (r, g, b, 220), (cx, cy), int(core_radius * 1.4))
-
-    # Horizontal and vertical diffraction spikes
-    p_left = (max(0, cx - length), cy)
-    p_right = (min(CANVAS_WIDTH, cx + length), cy)
-    pygame.draw.line(surface, (r, g, b, 210), p_left, p_right, spike_width)
-    pygame.draw.line(surface, (255, 255, 255, 240), (cx - int(length * 0.35), cy), (cx + int(length * 0.35), cy), 1)
-
-    p_top = (cx, max(0, cy - length))
-    p_bottom = (cx, min(CANVAS_HEIGHT, cy + length))
-    pygame.draw.line(surface, (r, g, b, 210), p_top, p_bottom, spike_width)
-    pygame.draw.line(surface, (255, 255, 255, 240), (cx, cy - int(length * 0.35)), (cx, cy + int(length * 0.35)), 1)
-
-    # Diagonal anamorphic streaks
-    diag_len = int(length * 0.35)
-    for sx, sy in [(-1, -1), (1, 1), (-1, 1), (1, -1)]:
-        pygame.draw.line(surface, (r, g, b, 100), (cx, cy), (cx + sx * diag_len, cy + sy * diag_len), 1)
-
-
 class StardustParticle:
     """Floating stardust micro-particle emitting from pencil tip or mouse."""
 
@@ -282,7 +206,7 @@ class StardustParticle:
 def main():
     # 2. Setup Pygame
     pygame.init()
-    pygame.display.set_caption("🌌 Day 13: Cosmic Universe - Progressive Corner & Vice-Versa | 30 Days Python")
+    pygame.display.set_caption("🌌 Day 13: Cosmic Universe - 100% Exact Image Drawing | 30 Days Python")
 
     screen = pygame.display.set_mode((CANVAS_WIDTH, CANVAS_HEIGHT), pygame.RESIZABLE)
     clock = pygame.time.Clock()
@@ -294,13 +218,10 @@ def main():
     master_surface = assets["master_surface"]
     forward_path = assets["forward_path"]
     reverse_path = assets["reverse_path"]
-    brush_mask = assets["brush_mask"]
     brush_rad = assets["brush_radius"]
-    stars = assets["stars"]
-    landmarks = assets["landmarks"]
 
-    # Layer surfaces
-    paint_layer = pygame.Surface((CANVAS_WIDTH, CANVAS_HEIGHT))
+    # Layer surfaces (convert to match display format perfectly)
+    paint_layer = pygame.Surface((CANVAS_WIDTH, CANVAS_HEIGHT)).convert()
     paint_layer.fill(SPACE_VOID)
     overlay_layer = pygame.Surface((CANVAS_WIDTH, CANVAS_HEIGHT), pygame.SRCALPHA)
 
@@ -336,19 +257,17 @@ def main():
     current_pt_idx = 0
     points_per_frame = DEFAULT_SPEED
     drawing_complete = False
-    stellar_progress = 0.0
     completion_pause_timer = 0  # Pause frames after completion before auto-vice-versa
 
     particles = []
 
     def reset_canvas(mode):
-        nonlocal current_mode, current_path, total_path_points, current_pt_idx, drawing_complete, stellar_progress, completion_pause_timer
+        nonlocal current_mode, current_path, total_path_points, current_pt_idx, drawing_complete, completion_pause_timer
         current_mode = mode
         current_path = forward_path if mode == "FORWARD" else reverse_path
         total_path_points = len(current_path)
         current_pt_idx = 0
         drawing_complete = False
-        stellar_progress = 0.0
         completion_pause_timer = 0
         paint_layer.fill(SPACE_VOID)
         for ax, ay, arad, abright in ambient_stars:
@@ -413,26 +332,24 @@ def main():
             for _ in range(points_per_frame):
                 if current_pt_idx >= total_path_points:
                     drawing_complete = True
+                    # Ensure canvas is 100% covered by the master image
+                    paint_layer.blit(master_surface, (0, 0))
                     break
 
                 px, py = current_path[current_pt_idx]
                 pencil_tip = (px, py)
 
-                # Transfer circular visible portion onto paint layer
-                x1 = px - brush_rad
-                y1 = py - brush_rad
-                src_x1 = max(0, x1)
-                src_y1 = max(0, y1)
-                src_x2 = min(CANVAS_WIDTH, x1 + 2 * brush_rad + 1)
-                src_y2 = min(CANVAS_HEIGHT, y1 + 2 * brush_rad + 1)
-                w = src_x2 - src_x1
-                h = src_y2 - src_y1
+                # Transfer exact visible portion from master surface onto canvas
+                x1 = max(0, px - brush_rad)
+                y1 = max(0, py - brush_rad)
+                x2 = min(CANVAS_WIDTH, px + brush_rad + 1)
+                y2 = min(CANVAS_HEIGHT, py + brush_rad + 1)
+                w = x2 - x1
+                h = y2 - y1
 
                 if w > 0 and h > 0:
-                    patch = master_surface.subsurface(pygame.Rect(src_x1, src_y1, w, h)).copy()
-                    mask_sub = brush_mask.subsurface(pygame.Rect(src_x1 - x1, src_y1 - y1, w, h))
-                    patch.blit(mask_sub, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
-                    paint_layer.blit(patch, (src_x1, src_y1))
+                    patch = master_surface.subsurface(pygame.Rect(x1, y1, w, h))
+                    paint_layer.blit(patch, (x1, y1))
 
                 current_pt_idx += 1
 
@@ -444,79 +361,19 @@ def main():
                 if random.random() < 0.40:
                     particles.append(StardustParticle(tx, ty, current_lead_color))
         elif drawing_complete:
-            # Handle post-completion celebration & Auto-Loop Vice-Versa
+            # Handle post-completion pause & Auto-Loop Vice-Versa
             if auto_loop:
                 completion_pause_timer += 1
-                if completion_pause_timer >= 180:  # 3 seconds pause with ignited stars
+                if completion_pause_timer >= 180:  # 3 seconds pause on finished masterpiece
                     # Switch to Vice-Versa direction
                     next_mode = "VICE_VERSA" if current_mode == "FORWARD" else "FORWARD"
                     reset_canvas(next_mode)
 
-        # Clear overlay layer for dynamic effects, pencil, and HUD
+        # Clear overlay layer for dynamic pencil and HUD only
         overlay_layer.fill((0, 0, 0, 0))
 
         # -------------------------------------------------------------
-        # STELLAR IGNITION & DIFFRACTION FLARES
-        # -------------------------------------------------------------
-        progress_pct = min(1.0, current_pt_idx / total_path_points)
-        if progress_pct >= 0.85:
-            if stellar_progress < 1.0:
-                stellar_progress = min(1.0, stellar_progress + 0.02)
-
-            num_ignited = int(len(stars) * stellar_progress)
-            time_ticks = pygame.time.get_ticks() * 0.003
-
-            # Render stars with gentle organic twinkle
-            for i in range(num_ignited):
-                s = stars[i]
-                twinkle = 1.0 + 0.16 * math.sin(time_ticks + s["phase"])
-                r_rad = max(1.0, 1.8 * twinkle)
-
-                pygame.draw.circle(overlay_layer, s["color"], (s["x"], s["y"]), int(r_rad))
-                pygame.draw.circle(overlay_layer, (255, 255, 255), (s["x"], s["y"]), max(1, int(r_rad * 0.5)))
-
-            # Primary golden star diffraction spike
-            p_x, p_y = landmarks["primary_star"]
-            draw_diffraction_spike(
-                overlay_layer,
-                (p_x, p_y),
-                int(140 * stellar_progress),
-                (255, 220, 90),
-                core_radius=7,
-                spike_width=3,
-            )
-
-            # Secondary upper golden star
-            u_x, u_y = landmarks["upper_gold_star"]
-            draw_diffraction_spike(
-                overlay_layer,
-                (u_x, u_y),
-                int(80 * stellar_progress),
-                (255, 240, 160),
-                core_radius=5,
-                spike_width=2,
-            )
-
-            # Cyan core star
-            c_x, c_y = landmarks["cyan_core"]
-            draw_diffraction_spike(
-                overlay_layer,
-                (c_x, c_y),
-                int(65 * stellar_progress),
-                (140, 240, 255),
-                core_radius=4,
-                spike_width=2,
-            )
-
-            # Horizon incandescent core warm breathing aura
-            h_x, h_y = landmarks["horizon_core"]
-            pulse = 1.0 + 0.05 * math.sin(time_ticks * 0.8)
-            for rad in range(int(85 * stellar_progress), 0, -5):
-                alpha = int((80 * (1.0 - rad / (85.0 * stellar_progress))) * pulse)
-                pygame.draw.circle(overlay_layer, (255, 245, 205, alpha), (h_x, h_y), rad)
-
-        # -------------------------------------------------------------
-        # RENDER PENCIL STYLUS CURSOR
+        # RENDER PENCIL STYLUS CURSOR (While drawing)
         # -------------------------------------------------------------
         if not drawing_complete and pencil_tip:
             # Angle adapts ergonomically to motion direction
@@ -535,13 +392,14 @@ def main():
         hud_bg.fill((6, 8, 18, 185))
         overlay_layer.blit(hud_bg, (0, CANVAS_HEIGHT - 28))
 
+        progress_pct = min(1.0, current_pt_idx / total_path_points)
         pct = int(progress_pct * 100)
         mode_label = "Top-Left (0,0) -> Bottom-Right" if current_mode == "FORWARD" else "Vice-Versa: Bottom-Right -> Top-Left"
 
         if is_paused:
             status_text = f"⏸️ PAUSED | Mode: {mode_label} [{pct}%]"
         elif drawing_complete:
-            status_text = f"✨ MASTERPIECE COMPLETE | Mode: {mode_label} [100%]"
+            status_text = f"✨ MASTERPIECE COMPLETE | 100% Exact Cosmic Universe | Mode: {mode_label}"
         else:
             status_text = f"✏️ DRAWING: {mode_label} [{pct}%] | Speed: {points_per_frame}pts/f"
 

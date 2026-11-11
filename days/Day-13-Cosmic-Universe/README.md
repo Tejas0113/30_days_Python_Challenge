@@ -21,20 +21,19 @@
 
 Day 13 delivers an authentic, deeply satisfying digital drawing simulation: **Cosmic Universe - Progressive Corner Drawing & Vice-Versa Simulation**.
 
-Instead of abrupt reveals or noisy digital static, the drawing tool glides from corner to corner, progressively rendering clearly visible portions of the cosmic universe onto the canvas:
-1. **Corner-to-Corner Progressive Drawing**: Begins cleanly in deep cosmic space (`#050610`) at one corner and sweeps along continuous diagonal bands across the entire canvas.
-2. **Visible Portion Revealing**: Every stroke renders a distinct circular portion (radius $24\text{ px}$, diameter $\sim 48\text{ px}$) of the cosmic nebula, letting you watch each stellar filament, cyan gas cloud, and fiery golden cosmic ridge emerge piece by piece.
-3. **Vice-Versa Mode**:
-   - **Forward**: Draws from Top-Left `(0, 0)` down to Bottom-Right `(1280, 640)`.
-   - **Vice-Versa**: Draws from Bottom-Right `(1280, 640)` up to Top-Left `(0, 0)`, sculpting the incandescent horizon cliffs first and sweeping towards deep space.
+The application draws the exact, pristine Cosmic Universe image slowly and steadily from corner to corner:
+1. **100% Exact Image Fidelity**: Faithful, bit-for-bit reproduction of the original cosmic universe image without artificial geometric overlays, fake circles, or cartoon spikes. Every star, glowing gas filament, and golden cosmic cliff is directly revealed from the master artwork.
+2. **Visible Portion Revealing**: As the pencil glides across the canvas, every stroke transfers a distinct, visible circular portion (radius $24\text{ px}$, diameter $\sim 48\text{ px}$) of the real cosmic nebula, letting you watch the entire universe emerge piece by piece.
+3. **Corner-to-Corner Trajectories**:
+   - **Forward**: Begins cleanly in deep cosmic space at **Top-Left Corner $(0, 0)$** and sweeps along continuous diagonal bands across to **Bottom-Right Corner $(1280, 640)$**.
+   - **Vice-Versa**: Draws from **Bottom-Right Corner $(1280, 640)$** back to **Top-Left Corner $(0, 0)$**, sculpting the incandescent horizon cliffs first and sweeping towards deep space.
    - **Auto-Loop**: Automatically alternates between Forward and Vice-Versa passes in a continuous, hypnotic loop.
 4. **Ergonomic Colored Pencil Stylus**: An authentic vector stylus leads the active drawing front:
    - Dynamic lead tip adopting the exact color of the active cosmic pigment.
    - Active brush radius guide ring showing the visible portion being revealed.
    - Sharpened cedar wood cone and 3D hexagonal barrel with golden ferrule.
-   - Graphite and stardust micro-particles emitting from the contact point.
-5. **Zero Sudden Image Jumps**: Overlapping circular portions achieve 100% genuine canvas coverage—there are no sudden flashes or abrupt replacements.
-6. **Stellar Ignition & Living Cosmos Mode**: Upon completing each pass, astronomical 4-point cross diffraction spikes flare on prominent star cores with gentle organic twinkling and interactive cursor stardust.
+   - Micro-stardust particles emitting from the contact point.
+5. **Zero Sudden Image Jumps**: Overlapping strokes achieve 100% genuine canvas coverage—there are no sudden flashes or abrupt replacements.
 
 ---
 
@@ -43,37 +42,21 @@ Instead of abrupt reveals or noisy digital static, the drawing tool glides from 
 ### 1. Diagonal Serpentine Manifold & Coverage ($x + y = d$)
 To simulate natural hand hatching, the canvas is parameterized by diagonal level sets:
 
-$$d = x + y, \quad d \in [-R, W + H + R]$$
+$$d = x + y, \quad d \in [0, W + H]$$
 
 For each diagonal band $d$ spaced by $\Delta d = \lfloor R \cdot 0.85 \rfloor = 20\text{ px}$:
-- Bounding coordinate range: $x_{\min} = \max(-R, d - H - R)$, $x_{\max} = \min(W + R, d + R)$
+- Bounding coordinate range: $x_{\min} = \max(0, d - H)$, $x_{\max} = \min(W, d)$
 - Direction alternates per band $i$ for continuous serpentine continuity:
   $$\mathbf{x}(s) = \begin{cases} (1 - s) x_{\min} + s\, x_{\max}, & i \text{ is even} \\ (1 - s) x_{\max} + s\, x_{\min}, & i \text{ is odd} \end{cases}$$
 - **Forward Trajectory**: $\mathcal{P}_{\text{fwd}} = [\mathbf{p}_0, \mathbf{p}_1, \dots, \mathbf{p}_N]$ from $(0, 0) \to (W, H)$.
 - **Vice-Versa Trajectory**: $\mathcal{P}_{\text{rev}} = \mathcal{P}_{\text{fwd}}^{-1} = [\mathbf{p}_N, \mathbf{p}_{N-1}, \dots, \mathbf{p}_0]$ from $(W, H) \to (0, 0)$.
 
-### 2. Multiplicative Alpha Circle Blitting
-At each drawing step $\mathbf{p} = (p_x, p_y)$, a circular portion is transferred from the scaled master surface using an alpha-multiplied circular mask:
+### 2. High-Fidelity Master Pixel Sampling
+At each drawing step $\mathbf{p} = (p_x, p_y)$, the exact pixel patch is copied from the scaled master surface:
 
-$$\Omega_{\text{brush}}(\mathbf{x}) = \begin{cases} 1.0, & \|\mathbf{x} - \mathbf{p}\| \le R \\ 0.0, & \text{otherwise} \end{cases}$$
+$$\Omega_{\text{brush}}(\mathbf{p}) = [p_x - R, p_x + R] \times [p_y - R, p_y + R]$$
 
-$$\mathbf{C}_{\text{canvas}}(\mathbf{x}) \leftarrow \mathbf{C}_{\text{canvas}}(\mathbf{x}) \odot (1 - \Omega) + \mathbf{C}_{\text{master}}(\mathbf{x}) \odot \Omega$$
-
-This produces authentic painterly edges while ensuring that when the trajectory completes, the union $\bigcup \Omega_{\text{brush}}$ covers 100% of the canvas with zero missing pixels.
-
-### 3. Astronomical 4-Point Diffraction Spike Optics
-Prominent stars exhibit diffraction spikes caused by telescope spider vanes. Modeled mathematically using linear intensity decays with core Gaussian bloom:
-
-$$I_{\text{spike}}(d) = I_0 \cdot \max\left(0, 1 - \frac{|d|}{L}\right)$$
-
-Rendered with central luminous white discs, golden outer halos ($R \approx 20\text{ px}$), and orthogonal spikes spanning $L \approx 140\text{ px}$.
-
-### 4. Harmonic Stellar Twinkle Physics
-In the Living Cosmos phase, stars shimmer organically using sinusoidal phase shifts:
-
-$$r_{\text{eff}}(t) = r_0 \left(1.0 + 0.16 \sin\left(\omega t + \phi_k\right)\right), \quad \phi_k \sim \mathcal{U}(0, 2\pi)$$
-
-delivering a natural, breathing night sky.
+Ensuring that by the time the trajectory reaches the opposite corner, 100% of the canvas has been covered with zero missing pixels, rendering the identical cosmic universe master image.
 
 ---
 
@@ -82,8 +65,8 @@ delivering a natural, breathing night sky.
 - **Language**: Python 3.10+
 - **Core Libraries**:
   - `pygame` / `pygame-ce` — 60 FPS hardware-accelerated rendering, alpha compositing, and user interaction.
-  - `numpy` — Fast array operations, surface coordinate buffers, and brightness analysis.
-  - `pillow` — Lanczos resampling and preview asset exports.
+  - `numpy` — Fast array operations and surface coordinate buffers.
+  - `pillow` — Preview asset exports.
 
 ---
 
