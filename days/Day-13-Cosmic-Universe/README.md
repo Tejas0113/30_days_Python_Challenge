@@ -21,12 +21,12 @@
 
 Day 13 brings an authentic, hypnotic generative painting experience: **Cosmic Universe - Generative Digital Painting & Stellar Ignition**.
 
-The program simulates the workflow of a digital master artist, slowly and organically bringing the entire celestial masterpiece to life right before your eyes in a 60 FPS hardware-accelerated Pygame window:
-1. **Primordial Void & Orbital Gas Drifts**: Begins in the pitch-black cosmic void (`#05060F`), swirling broad, translucent atmospheric brush washes that establish the ethereal macro nebula colors—from emerald turquoise on the left to deep violet and fiery amber along the horizon.
-2. **Cosmic Cliff Ridge Sculpting**: Uses 2D spatial gradient analysis to align directional brush strokes with the natural contours of the billowing cloud pillars, sculpting the dramatic mountainous cosmic cliffs and turbulent dust lanes.
-3. **100% Exact Pixel-Perfect Detail Convergence**: Successive high-frequency detail passes lock every single gas filament, stellar rift, and color variation into place, achieving absolute 1:1 mathematical fidelity with the reference masterpiece. No detail is missed.
-4. **Stellar Birth & Diffraction Flare Ignition**: Stars ignite in brilliant sequence, featuring the iconic 4-point golden cross diffraction star with horizontal/vertical spikes, radiant lens halos, and over 150 sparkling diamonds scattered across the void.
-5. **Living Cosmos Interactive Mode**: Once painted, the universe remains alive with subtle stellar twinkling, breathing incandescent core flares, and real-time interactive stardust that responds to cursor movement.
+The program simulates the steady, organic brushwork of a digital master artist, slowly bringing the entire celestial masterpiece to life in a 60 FPS hardware-accelerated Pygame window:
+1. **Clean Cosmic Void Inception**: Begins in a deep interstellar space canvas (`#050610`) populated by subtle ambient stars.
+2. **Organic Celestial Brush Trajectory**: A glowing celestial stylus (white core + warm golden corona) glides smoothly across the canvas in rhythmic, undulating sweeps, progressively painting the exact, saturated colors of the nebula.
+3. **Zero Noise, 100% Exact High-Fidelity Convergence**: Every single stroke reveals the pristine master artwork—from the emerald-turquoise clouds on the left to the radiant azure valley, rose-magenta stellar nursery, and fiery golden cosmic cliffs along the horizon. No noise, no blur, no missed details.
+4. **Stellar Birth & Diffraction Flare Ignition**: As the painting nears completion, the prominent stars ignite in sequence—featuring the iconic 4-point golden cross star in the lower-left with radiating horizontal and vertical diffraction spikes, the upper golden star, and the cyan nursery core.
+5. **Living Cosmos Interactive Mode**: Once painted, the universe remains alive with gentle stellar twinkling, breathing incandescent core flares, and real-time interactive stardust that responds to cursor movement.
 
 ---
 
@@ -100,3 +100,4 @@ python days/Day-13-Cosmic-Universe/main.py
 <p align="center">
   <a href="../../README.md"><b>⬅️ Return to 30 Days Challenge Tracker</b></a>
 </p>
+
