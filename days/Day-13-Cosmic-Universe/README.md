@@ -1,4 +1,4 @@
-# 🌌 Day 13: Cosmic Universe - Fine Pencil Hatching Simulation & Stellar Ignition
+# 🌌 Day 13: Cosmic Universe - Progressive Corner Drawing & Vice-Versa Simulation
 
 > **30 Days of Python Challenge** · Level Up Your Python Skills  
 > Created by **[@Tejas0113](https://github.com/Tejas0113)**
@@ -6,56 +6,63 @@
 ---
 
 <p align="center">
-  <img src="../../assets/day13_animation.gif" alt="Cosmic Universe Fine Pencil Hatching Drawing Animation" width="640px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(120, 230, 255, 0.4);" />
+  <img src="../../assets/day13_animation.gif" alt="Cosmic Universe Progressive Corner Drawing and Vice-Versa Animation" width="640px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(120, 230, 255, 0.4);" />
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Completed%20%E2%9C%85-brightgreen?style=for-the-badge" alt="Status" />
   <img src="https://img.shields.io/badge/Language-Python%203.10%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/Category-Generative%20Art%20%26%20Pencil%20Simulation-00f0ff?style=for-the-badge" alt="Category" />
+  <img src="https://img.shields.io/badge/Category-Generative%20Art%20%26%20Visual%20Simulation-00f0ff?style=for-the-badge" alt="Category" />
 </p>
 
 ---
 
 ## 📖 Overview
 
-Day 13 brings an authentic, satisfying colored-pencil drawing simulation: **Cosmic Universe - Fine Pencil Hatching Simulation & Stellar Ignition**.
+Day 13 delivers an authentic, deeply satisfying digital drawing simulation: **Cosmic Universe - Progressive Corner Drawing & Vice-Versa Simulation**.
 
-The application models an artist's colored pencil drawing the entire celestial masterpiece steadily from corner to corner:
-1. **Corner-to-Corner Diagonal Hatching**: Drawing begins precisely at the top-left corner `(0, 0)` in deep interstellar space, sweeping in continuous back-and-forth diagonal hatching bands ($x + y = d$) across 641 diagonals to reach the opposite corner `(1280, 640)`.
-2. **Authentic Pencil Size**: Employs a fine pencil nib ($\sim 3\text{--}4\text{ px}$ width) mimicking traditional colored-pencil shading time-lapses.
-3. **Ergonomic Colored Pencil Stylus**: A visible vector pencil leads the drawing frontier at a natural $50^\circ$ angle:
-   - Dynamic lead tip reflecting the exact cosmic pigment at the active coordinate.
-   - Sharpened cedar wood collar and 3D-shaded hexagonal barrel with golden ferrule.
+Instead of abrupt reveals or noisy digital static, the drawing tool glides from corner to corner, progressively rendering clearly visible portions of the cosmic universe onto the canvas:
+1. **Corner-to-Corner Progressive Drawing**: Begins cleanly in deep cosmic space (`#050610`) at one corner and sweeps along continuous diagonal bands across the entire canvas.
+2. **Visible Portion Revealing**: Every stroke renders a distinct circular portion (radius $24\text{ px}$, diameter $\sim 48\text{ px}$) of the cosmic nebula, letting you watch each stellar filament, cyan gas cloud, and fiery golden cosmic ridge emerge piece by piece.
+3. **Vice-Versa Mode**:
+   - **Forward**: Draws from Top-Left `(0, 0)` down to Bottom-Right `(1280, 640)`.
+   - **Vice-Versa**: Draws from Bottom-Right `(1280, 640)` up to Top-Left `(0, 0)`, sculpting the incandescent horizon cliffs first and sweeping towards deep space.
+   - **Auto-Loop**: Automatically alternates between Forward and Vice-Versa passes in a continuous, hypnotic loop.
+4. **Ergonomic Colored Pencil Stylus**: An authentic vector stylus leads the active drawing front:
+   - Dynamic lead tip adopting the exact color of the active cosmic pigment.
+   - Active brush radius guide ring showing the visible portion being revealed.
+   - Sharpened cedar wood cone and 3D hexagonal barrel with golden ferrule.
    - Graphite and stardust micro-particles emitting from the contact point.
-4. **Zero Noise, 100% Exact High-Fidelity Reproduction**: Every single stroke renders the exact master artwork—emerald nebula pillars, radiant azure core, magenta clouds, and golden cosmic cliffs along the horizon. Zero blur, zero digital static.
-5. **Stellar Birth & Diffraction Flare Ignition**: As the drawing nears completion ($\ge 80\%$), prominent star cores ignite with astronomical 4-point cross diffraction spikes (JWST Carina Nebula style).
-6. **Living Cosmos Interactive Mode**: Once complete, the universe remains alive with gentle stellar twinkling and real-time interactive stardust that responds to cursor movement.
+5. **Zero Sudden Image Jumps**: Overlapping circular portions achieve 100% genuine canvas coverage—there are no sudden flashes or abrupt replacements.
+6. **Stellar Ignition & Living Cosmos Mode**: Upon completing each pass, astronomical 4-point cross diffraction spikes flare on prominent star cores with gentle organic twinkling and interactive cursor stardust.
 
 ---
 
 ## 🧠 Concepts & Mathematical Mechanics
 
-### 1. Diagonal Zig-Zag Hatching Manifold ($x + y = d$)
-To simulate continuous human hand hatching, the canvas is parameterized by diagonal level sets:
+### 1. Diagonal Serpentine Manifold & Coverage ($x + y = d$)
+To simulate natural hand hatching, the canvas is parameterized by diagonal level sets:
 
-$$d = x + y, \quad d \in [0, W + H]$$
+$$d = x + y, \quad d \in [-R, W + H + R]$$
 
-For each diagonal band $d$ spaced by pencil width $\Delta d = 3\text{ px}$:
-- Bounding coordinate range: $x_{\min} = \max(0, d - H)$, $x_{\max} = \min(W, d)$
-- Trajectory orientation alternates per band $i$:
+For each diagonal band $d$ spaced by $\Delta d = \lfloor R \cdot 0.85 \rfloor = 20\text{ px}$:
+- Bounding coordinate range: $x_{\min} = \max(-R, d - H - R)$, $x_{\max} = \min(W + R, d + R)$
+- Direction alternates per band $i$ for continuous serpentine continuity:
   $$\mathbf{x}(s) = \begin{cases} (1 - s) x_{\min} + s\, x_{\max}, & i \text{ is even} \\ (1 - s) x_{\max} + s\, x_{\min}, & i \text{ is odd} \end{cases}$$
-- This guarantees a continuous, unbroken zig-zag path spanning 154,250 points from $(0, 0)$ to $(W, H)$ with 100% pixel coverage and zero gaps.
+- **Forward Trajectory**: $\mathcal{P}_{\text{fwd}} = [\mathbf{p}_0, \mathbf{p}_1, \dots, \mathbf{p}_N]$ from $(0, 0) \to (W, H)$.
+- **Vice-Versa Trajectory**: $\mathcal{P}_{\text{rev}} = \mathcal{P}_{\text{fwd}}^{-1} = [\mathbf{p}_N, \mathbf{p}_{N-1}, \dots, \mathbf{p}_0]$ from $(W, H) \to (0, 0)$.
 
-### 2. Micro-Patch High-Fidelity Sampling
-At each pencil tip coordinate $(x, y)$, a localized nib patch is transferred from the high-resolution master surface:
+### 2. Multiplicative Alpha Circle Blitting
+At each drawing step $\mathbf{p} = (p_x, p_y)$, a circular portion is transferred from the scaled master surface using an alpha-multiplied circular mask:
 
-$$\Omega_{\text{pencil}}(x, y) = [x - R, x + R] \times [y - R, y + R], \quad R = 2\text{ px}$$
+$$\Omega_{\text{brush}}(\mathbf{x}) = \begin{cases} 1.0, & \|\mathbf{x} - \mathbf{p}\| \le R \\ 0.0, & \text{otherwise} \end{cases}$$
 
-Because $\Delta s \le R$, consecutive pencil stamps overlap smoothly, producing solid, vibrant colored pencil strokes without digital artifacts or noise.
+$$\mathbf{C}_{\text{canvas}}(\mathbf{x}) \leftarrow \mathbf{C}_{\text{canvas}}(\mathbf{x}) \odot (1 - \Omega) + \mathbf{C}_{\text{master}}(\mathbf{x}) \odot \Omega$$
+
+This produces authentic painterly edges while ensuring that when the trajectory completes, the union $\bigcup \Omega_{\text{brush}}$ covers 100% of the canvas with zero missing pixels.
 
 ### 3. Astronomical 4-Point Diffraction Spike Optics
-Prominent stars exhibit diffraction spikes caused by the spider vanes of astronomical telescopes. These are modeled mathematically using linear intensity decays with core Gaussian bloom:
+Prominent stars exhibit diffraction spikes caused by telescope spider vanes. Modeled mathematically using linear intensity decays with core Gaussian bloom:
 
 $$I_{\text{spike}}(d) = I_0 \cdot \max\left(0, 1 - \frac{|d|}{L}\right)$$
 
@@ -75,7 +82,7 @@ delivering a natural, breathing night sky.
 - **Language**: Python 3.10+
 - **Core Libraries**:
   - `pygame` / `pygame-ce` — 60 FPS hardware-accelerated rendering, alpha compositing, and user interaction.
-  - `numpy` — Fast array operations, surface transposed coordinate buffers, and brightness analysis.
+  - `numpy` — Fast array operations, surface coordinate buffers, and brightness analysis.
   - `pillow` — Lanczos resampling and preview asset exports.
 
 ---
@@ -92,12 +99,14 @@ python days/Day-13-Cosmic-Universe/main.py
 
 | Input | Action |
 | :---: | :--- |
-| **`[SPACE]`** | Pause / Resume pencil drawing animation |
-| **`[R]`** | Restart drawing from corner `(0, 0)` |
-| **`[+]` / `[UP]`** | Increase pencil drawing speed (+30 pts/frame) |
-| **`[-]` / `[DOWN]`** | Decrease pencil drawing speed (-30 pts/frame) |
-| **`[1]` - `[4]`** | Preset speeds (1: Slow, 2: Standard, 3: Quick, 4: Hyper-lapse) |
-| **`[S]`** | Save high-resolution screenshot (`cosmic_universe_screenshot.png`) |
+| **`[SPACE]`** | Pause / Resume drawing animation |
+| **`[V]`** | Toggle Vice-Versa corner direction (Top-Left $\leftrightarrow$ Bottom-Right) |
+| **`[R]`** | Restart current drawing from corner |
+| **`[A]`** | Toggle Auto-Loop Vice-Versa cycle (on by default) |
+| **`[+]` / `[UP]`** | Increase drawing speed (+1 pt/frame) |
+| **`[-]` / `[DOWN]`** | Decrease drawing speed (-1 pt/frame) |
+| **`[1]` - `[4]`** | Preset speeds (1: Meditative, 2: Standard, 3: Fast, 4: Turbo) |
+| **`[S]`** | Save high-resolution screenshot (`cosmic_universe_*.png`) |
 | **`[F]`** | Toggle fullscreen mode |
 | **`[ESC]` / `[Q]`** | Exit application cleanly |
 | **Mouse Move** | Interactive luminous stardust particles drift across canvas |
