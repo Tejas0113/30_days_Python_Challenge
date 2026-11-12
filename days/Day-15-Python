@@ -1,0 +1,14 @@
+import random
+import turtle
+
+t = turtle.Turtle()
+s = turtle.Screen()
+s.bgcolor("black")
+t.speed(0)
+
+for x in range(500):
+  t.pencolor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+  t.forward(x + 50)
+  t.right(91)
+
+turtle.exitonclick()
