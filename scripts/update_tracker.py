@@ -152,12 +152,12 @@ CURRICULUM = [
     },
     {
         "day": 16,
-        "title": "Flappy Bird Physics Clone",
-        "description": "Side-scrolling arcade game with gravity acceleration, flap velocity impulses, moving pipe pairs, and hitboxes.",
-        "concepts": "Gravity & Velocity Vectors, Obstacle Spawning, AABB Hitboxes",
-        "category": "2D Game Dev",
-        "folder": "Day-16-Flappy-Bird",
-        "entry": "days/Day-16-Flappy-Bird/main.py",
+        "title": "Spider-Man Comic Vector Sketch Art",
+        "description": "Algorithmic vector comic sketch animation translating Spider-Man art into quantized geometric polygons and fine silk-web contours using Python Turtle and OpenCV.",
+        "concepts": "Python Turtle, OpenCV K-Means Quantization, Polygon Approximation DP, Silk Web Inking",
+        "category": "Generative Art",
+        "folder": "Day-16-Spiderman-Sketch",
+        "entry": "days/Day-16-Spiderman-Sketch/main.py",
     },
     {
         "day": 17,
