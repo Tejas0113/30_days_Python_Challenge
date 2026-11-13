@@ -74,8 +74,14 @@ The result is a responsive, hardware-friendly digital sketch experience rendered
 ### 1. Dynamic Path Resolution
 Eliminates brittle hardcoded absolute filesystem paths (`/days/...`) that cause immediate crashes on Unix/macOS environments. Automatically locates `Spider-Man-Pose6-683x1024.jpg` whether invoked from the repository root, within the project folder, or via an IDE run configuration.
 
-### 2. K-Means Chromatic Quantization
-Groups continuous tone gradients into $K = 16$ discrete color clusters using Lloyd's Euclidean distance minimization:
+### 2. Normalized World Coordinates Viewport (`setworldcoordinates`)
+Configures Turtle with `setworldcoordinates(-450, -450, 450, 450)` over a $850 \times 850$ canvas. This guarantees:
+- **Zero Edge Clipping**: Generous padding on all four borders so no parts of Spider-Man are cut off.
+- **Harmonious Aspect Ratio**: Proportions remain crisp and undistorted across different monitor sizes or window resizing.
+- **Isotropic Centering**: All extracted vector coordinates are aligned relative to $(0, 0)$ center-origin.
+
+### 3. K-Means Chromatic Quantization
+Groups continuous tone gradients into $K = 18$ discrete color clusters using Lloyd's Euclidean distance minimization:
 
 $$\arg\min_{\mathbf{S}} \sum_{i=1}^{k} \sum_{\mathbf{x} \in S_i} \|\mathbf{x} - \boldsymbol{\mu}_i\|^2$$
 

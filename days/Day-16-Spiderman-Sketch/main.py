@@ -11,6 +11,7 @@ simplification, and dual-layer drawing:
 
 Features:
   - Dynamic path resolution: runs seamlessly anywhere without FileNotFoundError
+  - Normalized world coordinates: setworldcoordinates(-450, -450, 450, 450) for perfect visibility
   - Python Turtle graphics animation with classic black arrow cursor
   - Smart paper-tone background detection (no black boundary cuts across empty canvas)
   - Interactive keyboard controls:
@@ -52,20 +53,24 @@ for p in CANDIDATE_PATHS:
         IMAGE_PATH = p
         break
 
-# Default parameters
-CANVAS_WIDTH = 460
-NUM_COLORS = 16
-EPSILON_FACTOR = 0.005
-MIN_CONTOUR_AREA = 10
-INK_EDGE_LOW = 45
-INK_EDGE_HIGH = 120
-DEFAULT_BATCH_SIZE = 4
+# Viewport & Coordinate Space Configuration
+# Normalized coordinates: [-450, -450, 450, 450] provides perfect framing & visibility
+WORLD_COORDINATES = (-450, -450, 450, 450)
+TARGET_HEIGHT = 800         # Fits comfortably in [-400, 400], leaving 50px top/bottom padding
+WINDOW_WIDTH = 850          # Generous desktop canvas window
+WINDOW_HEIGHT = 850
+NUM_COLORS = 18             # Rich comic palette (reds, scarlets, navy, cobalts, white eye lenses)
+EPSILON_FACTOR = 0.004      # Polygon contour simplification
+MIN_CONTOUR_AREA = 12       # Filters micro noise speckles
+INK_EDGE_LOW = 40           # Canny low threshold for web inking
+INK_EDGE_HIGH = 115         # Canny high threshold for web inking
+DEFAULT_BATCH_SIZE = 6      # Balanced animated rendering speed
 
 
 # ==============================================================================
 # 2. IMAGE PREPROCESSING & VECTOR EXTRACTION
 # ==============================================================================
-def quantize_palette(img_bgr, k=16):
+def quantize_palette(img_bgr, k=18):
     """Reduces the image to k dominant colors using K-Means clustering."""
     data = np.float32(img_bgr).reshape((-1, 3))
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 25, 0.5)
@@ -77,14 +82,17 @@ def quantize_palette(img_bgr, k=16):
     return quantized, centers
 
 
-def extract_vector_elements(image_path, target_width=CANVAS_WIDTH):
+def extract_vector_elements(image_path, target_height=TARGET_HEIGHT):
     """
     Extracts ordered vector polygons and ink web lines from the Spider-Man artwork.
+    Normalized into the centered world coordinate space.
     Returns:
       - polygons: list of (hex_color, points, area) sorted large-to-small
       - ink_lines: list of polyline point lists for web & contour inking
       - paper_hex: detected background paper tone
-      - canvas_w, canvas_h: scaled dimensions
+      - target_width, target_height: scaled dimensions
+      - resized: resized BGR image
+      - bg_bgr: background BGR tuple
     """
     if not image_path or not os.path.isfile(image_path):
         raise FileNotFoundError(
@@ -97,8 +105,8 @@ def extract_vector_elements(image_path, target_width=CANVAS_WIDTH):
         raise ValueError(f"Failed to decode image from '{image_path}'.")
 
     orig_h, orig_w = img.shape[:2]
-    scale = target_width / orig_w
-    target_height = int(orig_h * scale)
+    scale = target_height / orig_h
+    target_width = int(orig_w * scale)
     resized = cv2.resize(img, (target_width, target_height), interpolation=cv2.INTER_AREA)
 
     # Edge-preserving bilateral filter
@@ -109,10 +117,10 @@ def extract_vector_elements(image_path, target_width=CANVAS_WIDTH):
 
     # Detect background paper tone from corner regions
     border_samples = np.vstack([
-        quantized[:12, :12].reshape(-1, 3),
-        quantized[:12, -12:].reshape(-1, 3),
-        quantized[-12:, :12].reshape(-1, 3),
-        quantized[-12:, -12:].reshape(-1, 3),
+        quantized[:15, :15].reshape(-1, 3),
+        quantized[:15, -15:].reshape(-1, 3),
+        quantized[-15:, :15].reshape(-1, 3),
+        quantized[-15:, -15:].reshape(-1, 3),
     ])
     bg_bgr = np.median(border_samples, axis=0).astype(np.uint8)
     paper_hex = "#{:02x}{:02x}{:02x}".format(int(bg_bgr[2]), int(bg_bgr[1]), int(bg_bgr[0]))
@@ -145,7 +153,7 @@ def extract_vector_elements(image_path, target_width=CANVAS_WIDTH):
             approx = cv2.approxPolyDP(cnt, epsilon, True)
 
             if len(approx) >= 3:
-                # Convert OpenCV (top-left) to Turtle (center origin) coordinates
+                # Convert OpenCV (top-left) to Turtle (center-origin) coordinates
                 pts = [(pt[0][0] - target_width / 2.0, target_height / 2.0 - pt[0][1]) for pt in approx]
                 polygons.append((hex_color, pts, area))
 
@@ -161,7 +169,7 @@ def extract_vector_elements(image_path, target_width=CANVAS_WIDTH):
     ink_lines = []
     for cnt in contours:
         if cv2.arcLength(cnt, False) >= 8:
-            approx = cv2.approxPolyDP(cnt, 1.0, False)
+            approx = cv2.approxPolyDP(cnt, 0.8, False)
             if len(approx) >= 2:
                 pts = [(pt[0][0] - target_width / 2.0, target_height / 2.0 - pt[0][1]) for pt in approx]
                 ink_lines.append(pts)
@@ -193,21 +201,23 @@ class SpidermanSketchApp:
         self.bind_events()
 
     def setup_screen(self):
-        """Initializes Turtle screen, canvas properties, and drawing pen."""
+        """Initializes Turtle screen, normalized world coordinates, and drawing pen."""
         self.screen = turtle.Screen()
-        margin_w = 60
-        margin_h = 70
-        self.screen.setup(width=self.width + margin_w, height=self.height + margin_h)
+        self.screen.setup(width=WINDOW_WIDTH, height=WINDOW_HEIGHT)
+
+        # Set normalized world coordinate viewport [-450, -450, 450, 450]
+        # This guarantees perfect centering, balanced margins, and zero clipping on any display
+        self.screen.setworldcoordinates(*WORLD_COORDINATES)
         self.screen.bgcolor(self.paper_hex)
         self.update_title("Loading Spider-Man Vector Model...")
 
-        # Disable auto-refresh for performance
+        # Disable auto-refresh for smooth performance buffering
         self.screen.tracer(0, 0)
 
         # Main drawing turtle (classic black arrow cursor)
         self.pen = turtle.Turtle()
         self.pen.shape("arrow")
-        self.pen.shapesize(0.55, 0.55)
+        self.pen.shapesize(0.65, 0.65)
         self.pen.speed(0)
         self.pen.pensize(1)
 
@@ -416,7 +426,7 @@ def main():
     start_time = time.time()
 
     polygons, ink_lines, paper_hex, width, height, raw_resized, bg_bgr = extract_vector_elements(
-        IMAGE_PATH, CANVAS_WIDTH
+        IMAGE_PATH, TARGET_HEIGHT
     )
 
     elapsed = time.time() - start_time
@@ -425,6 +435,7 @@ def main():
     print(f"   • Ink Silk Web Strokes  : {len(ink_lines)}")
     print(f"   • Paper Canvas Tone     : {paper_hex}")
     print(f"   • Canvas Dimensions     : {width} x {height}")
+    print(f"   • World Coordinates     : {WORLD_COORDINATES}")
 
     print("\n🎮 Interactive Keyboard Controls:")
     print("   [Space]   : Pause / Resume animation")
