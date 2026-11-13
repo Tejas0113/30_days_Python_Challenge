@@ -143,12 +143,12 @@ CURRICULUM = [
     },
     {
         "day": 15,
-        "title": "Interactive Kaleidoscope & Mandala",
-        "description": "Real-time drawing canvas replicating mouse/keyboard strokes across 8-fold rotational and mirror symmetries.",
-        "concepts": "Rotational Symmetry, Polar-to-Cartesian Mapping, Event Listeners",
+        "title": "Geometric Square Spiral Vortex Art",
+        "description": "Kinetic generative artwork elevating the classic 91° square spiral into a glowing neon vortex with dynamic precession, multi-pass bloom, and chromatic themes.",
+        "concepts": "Pygame, Polygonal Spirals, Precession Math, Multi-Pass Bloom, HSV Chromatic Flow",
         "category": "Generative Art",
-        "folder": "Day-15-Interactive-Kaleidoscope",
-        "entry": "days/Day-15-Interactive-Kaleidoscope/main.py",
+        "folder": "Day-15-Geometric-Square-Spiral",
+        "entry": "days/Day-15-Geometric-Square-Spiral/main.py",
     },
     {
         "day": 16,
