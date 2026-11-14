@@ -6,6 +6,19 @@ Description:
 A generative vector sketch animation that recreates the stunning albino
 python artwork with exact form, scale detailing, glowing crimson eye, and rich
 crimson color combination matching 'python snake image.jpeg'.
+
+Features:
+  - Dynamic path resolution: runs seamlessly anywhere without FileNotFoundError
+  - Normalized world coordinates: setworldcoordinates(-450, -450, 450, 450) for perfect visibility
+  - Python Turtle graphics animation with classic black arrow cursor
+  - Smart crimson paper-tone background detection (no black boundary cuts across empty canvas)
+  - Interactive keyboard controls:
+      [Space]   : Pause / Resume animation
+      [+] / [-] : Speed up / Slow down drawing
+      [C]       : Fast-forward / Complete drawing instantly
+      [S]       : Save high-res screenshot / poster
+      [Q / Esc] : Graceful exit
+  - Robust exception handling: clean exit on window close without crashes
 """
 
 import math
@@ -16,7 +29,6 @@ import tkinter as tk
 import turtle
 import cv2
 import numpy as np
-from PIL import Image, ImageDraw, ImageFilter
 
 # ==============================================================================
 # 1. CONFIGURATION & DYNAMIC PATH RESOLUTION
@@ -169,3 +181,281 @@ def extract_vector_elements(image_path=None, target_height=TARGET_HEIGHT):
                 ink_lines.append(pts)
 
     return polygons, ink_lines, paper_hex, target_width, target_height, resized, bg_bgr
+
+
+# ==============================================================================
+# 3. INTERACTIVE TURTLE ANIMATION ENGINE
+# ==============================================================================
+class PythonSnakeSketchApp:
+    def __init__(self, polygons, ink_lines, paper_hex, width, height, raw_resized, bg_bgr):
+        self.polygons = polygons
+        self.ink_lines = ink_lines
+        self.paper_hex = paper_hex
+        self.width = width
+        self.height = height
+        self.raw_resized = raw_resized
+        self.bg_bgr = bg_bgr
+
+        # Animation states
+        self.is_paused = False
+        self.fast_forward = False
+        self.running = True
+        self.batch_size = DEFAULT_BATCH_SIZE
+        self.phase = "Init"
+
+        self.setup_screen()
+        self.bind_events()
+
+    def setup_screen(self):
+        """Initializes Turtle screen, normalized world coordinates, and drawing pen."""
+        self.screen = turtle.Screen()
+        self.screen.setup(width=WINDOW_WIDTH, height=WINDOW_HEIGHT)
+
+        # Set normalized world coordinate viewport [-450, -450, 450, 450]
+        # This guarantees perfect centering, balanced margins, and zero clipping on any display
+        self.screen.setworldcoordinates(*WORLD_COORDINATES)
+        self.screen.bgcolor(self.paper_hex)
+        self.update_title("Loading Python Snake Vector Model...")
+
+        # Disable auto-refresh for smooth performance buffering
+        self.screen.tracer(0, 0)
+
+        # Main drawing turtle (classic black arrow cursor)
+        self.pen = turtle.Turtle()
+        self.pen.shape("arrow")
+        self.pen.shapesize(0.65, 0.65)
+        self.pen.speed(0)
+        self.pen.pensize(1)
+
+        # Intercept window close to exit cleanly
+        try:
+            root = self.screen._root
+            root.protocol("WM_DELETE_WINDOW", self.on_close)
+        except Exception:
+            pass
+
+    def update_title(self, status):
+        """Updates window title bar with progress and control tips."""
+        try:
+            pause_str = "[PAUSED] " if self.is_paused else ""
+            title = (
+                f"{pause_str}🐍 Albino Python Sketch | {status} | "
+                f"Speed: {self.batch_size}x | [Space] Pause [C] Fast [S] Save [Q] Quit"
+            )
+            self.screen.title(title)
+        except Exception:
+            pass
+
+    def bind_events(self):
+        """Binds keyboard controls for real-time interactivity."""
+        self.screen.listen()
+        self.screen.onkey(self.toggle_pause, "space")
+        self.screen.onkey(self.speed_up, "plus")
+        self.screen.onkey(self.speed_up, "equal")
+        self.screen.onkey(self.speed_up, "Up")
+        self.screen.onkey(self.speed_down, "minus")
+        self.screen.onkey(self.speed_down, "underscore")
+        self.screen.onkey(self.speed_down, "Down")
+        self.screen.onkey(self.complete_instantly, "c")
+        self.screen.onkey(self.complete_instantly, "C")
+        self.screen.onkey(self.save_artwork, "s")
+        self.screen.onkey(self.save_artwork, "S")
+        self.screen.onkey(self.on_close, "q")
+        self.screen.onkey(self.on_close, "Q")
+        self.screen.onkey(self.on_close, "Escape")
+
+    def toggle_pause(self):
+        self.is_paused = not self.is_paused
+        status = "Paused" if self.is_paused else f"{self.phase}"
+        self.update_title(status)
+
+    def speed_up(self):
+        self.batch_size = min(self.batch_size + 4, 120)
+        self.update_title(f"{self.phase} (Speed: {self.batch_size}x)")
+
+    def speed_down(self):
+        self.batch_size = max(self.batch_size - 2, 1)
+        self.update_title(f"{self.phase} (Speed: {self.batch_size}x)")
+
+    def complete_instantly(self):
+        self.fast_forward = True
+        self.batch_size = 250
+
+    def on_close(self):
+        self.running = False
+        try:
+            turtle.bye()
+        except Exception:
+            pass
+
+    def save_artwork(self):
+        """Exports the rendered masterpiece as a high-resolution PNG image."""
+        try:
+            output_dir = os.path.join(SCRIPT_DIR, "output")
+            os.makedirs(output_dir, exist_ok=True)
+            output_path = os.path.join(output_dir, "python_snake_sketch_export.png")
+
+            # Render full vector image directly to canvas for perfect fidelity
+            canvas = np.full_like(self.raw_resized, self.bg_bgr)
+
+            # Draw polygons
+            for hex_col, pts, _ in self.polygons:
+                rgb = [int(hex_col[i:i+2], 16) for i in (1, 3, 5)]
+                bgr = (rgb[2], rgb[1], rgb[0])
+                cv_pts = np.array([
+                    [int(p[0] + self.width / 2.0), int(self.height / 2.0 - p[1])]
+                    for p in pts
+                ], dtype=np.int32)
+                cv2.fillPoly(canvas, [cv_pts], bgr)
+                cv2.polylines(canvas, [cv_pts], True, (max(0, bgr[0]-25), max(0, bgr[1]-25), max(0, bgr[2]-25)), 1, cv2.LINE_AA)
+
+            # Draw ink scale lines
+            for pts in self.ink_lines:
+                cv_pts = np.array([
+                    [int(p[0] + self.width / 2.0), int(self.height / 2.0 - p[1])]
+                    for p in pts
+                ], dtype=np.int32)
+                cv2.polylines(canvas, [cv_pts], False, (15, 5, 45), 1, cv2.LINE_AA)
+
+            cv2.imwrite(output_path, canvas)
+            print(f"✨ Artwork saved successfully: {output_path}")
+            self.update_title(f"Saved to {os.path.basename(output_path)}!")
+        except Exception as e:
+            print(f"Error saving artwork: {e}")
+
+    def run(self):
+        """Executes the dual-phase drawing pipeline with live user feedback."""
+        try:
+            # --------------------------------------------------------------
+            # Phase 1: Draw Vector Color Polygons (Anatomic Coils & Flats)
+            # --------------------------------------------------------------
+            self.phase = "Phase 1/2: Anatomic Body Flats & Shading"
+            total_polys = len(self.polygons)
+            print(f"\n🎨 Phase 1: Drawing {total_polys} Anatomic Body Polygons (Pearlescent albino flats)...")
+
+            for i, (hex_col, pts, _) in enumerate(self.polygons):
+                if not self.running:
+                    return
+
+                while self.is_paused and self.running:
+                    time.sleep(0.04)
+                    try:
+                        self.screen.update()
+                    except Exception:
+                        return
+
+                self.pen.penup()
+                self.pen.goto(pts[0])
+                self.pen.pendown()
+
+                # Outline color subtly darker than fill for realistic scale boundaries
+                self.pen.pencolor("#3d0810")
+                self.pen.fillcolor(hex_col)
+                self.pen.begin_fill()
+
+                for pt in pts[1:]:
+                    self.pen.goto(pt)
+                self.pen.goto(pts[0])
+                self.pen.end_fill()
+
+                if (i % self.batch_size == 0) or (i == total_polys - 1) or self.fast_forward:
+                    self.screen.update()
+                    progress = int((i + 1) / total_polys * 100)
+                    self.update_title(f"Phase 1: Coils & Flats ({progress}%)")
+
+            # --------------------------------------------------------------
+            # Phase 2: Inking Scale Patterns & Head Features
+            # --------------------------------------------------------------
+            self.phase = "Phase 2/2: Inking Scales & Head Features"
+            total_inks = len(self.ink_lines)
+            print(f"✒️  Phase 2: Inking {total_inks} Scale Edges, Cephalic Plates & Eye...")
+
+            self.pen.pencolor("#2b040a")
+            self.pen.pensize(1.2)
+
+            for j, pts in enumerate(self.ink_lines):
+                if not self.running:
+                    return
+
+                while self.is_paused and self.running:
+                    time.sleep(0.04)
+                    try:
+                        self.screen.update()
+                    except Exception:
+                        return
+
+                self.pen.penup()
+                self.pen.goto(pts[0])
+                self.pen.pendown()
+
+                for pt in pts[1:]:
+                    self.pen.goto(pt)
+
+                if (j % self.batch_size == 0) or (j == total_inks - 1) or self.fast_forward:
+                    self.screen.update()
+                    progress = int((j + 1) / total_inks * 100)
+                    self.update_title(f"Phase 2: Inking Scales ({progress}%)")
+
+            # Finished
+            self.pen.hideturtle()
+            self.screen.update()
+            self.phase = "Masterpiece Complete"
+            print("🐍 Albino Python vector sketch complete! Press [S] to Save, [Q] to Exit.")
+            self.update_title("Masterpiece Complete! [S] Save [Q] Exit")
+
+            # Keep window interactive until user quits
+            self.screen.exitonclick()
+
+        except (turtle.Terminator, tk.TclError):
+            # Graceful window close handling
+            print("\nWindow closed. Exiting Python snake sketch.")
+        except KeyboardInterrupt:
+            print("\nAnimation stopped by user.")
+
+
+# ==============================================================================
+# 4. ENTRY POINT
+# ==============================================================================
+def main():
+    print("=" * 65)
+    print("🐍  DAY 17: ALBINO PYTHON REALISTIC VECTOR SKETCH ART  🐍")
+    print("30 Days Python Challenge by Tejas (@Tejas0113)")
+    print("=" * 65)
+
+    if not IMAGE_PATH:
+        print(f"❌ Error: Image '{IMAGE_FILENAME}' not found!")
+        print("Please ensure the image is inside 'days/Day-17-Python Sketch/'.")
+        sys.exit(1)
+
+    print(f"📷 Source Image: {IMAGE_PATH}")
+    print("⚙️  Extracting vector scales, chromatic palette, and contour inking...")
+    start_time = time.time()
+
+    polygons, ink_lines, paper_hex, width, height, raw_resized, bg_bgr = extract_vector_elements(
+        IMAGE_PATH, TARGET_HEIGHT
+    )
+
+    elapsed = time.time() - start_time
+    print(f"✅ Vectorization finished in {elapsed:.2f}s:")
+    print(f"   • Vector Color Polygons : {len(polygons)}")
+    print(f"   • Scale Contour Strokes : {len(ink_lines)}")
+    print(f"   • Canvas Crimson Tone   : {paper_hex}")
+    print(f"   • Dimensions            : {width} x {height}")
+    print(f"   • World Coordinates     : {WORLD_COORDINATES}")
+
+    print("\n🎮 Interactive Keyboard Controls:")
+    print("   [Space]   : Pause / Resume animation")
+    print("   [+] / [-] : Speed up / Slow down drawing rate")
+    print("   [C]       : Fast-forward / Complete instantly")
+    print("   [S]       : Save high-resolution PNG poster")
+    print("   [Q / Esc] : Quit application")
+    print("-" * 65)
+
+    app = PythonSnakeSketchApp(
+        polygons, ink_lines, paper_hex, width, height, raw_resized, bg_bgr
+    )
+    app.run()
+
+
+if __name__ == "__main__":
+    main()
