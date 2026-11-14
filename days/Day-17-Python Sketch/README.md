@@ -1,4 +1,4 @@
-# 🐍 Day 17: Albino Python Realistic Digital Sketch Art
+# 🐍 Day 17: Albino Python Realistic Vector Sketch Art
 
 > **30 Days of Python Challenge** · Level Up Your Python Skills  
 > Created by **[@Tejas0113](https://github.com/Tejas0113)**
@@ -6,26 +6,28 @@
 ---
 
 <p align="center">
-  <img src="../../assets/day17_animation.gif" alt="Albino Python Realistic Digital Sketch Art Preview" width="520px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(118, 1, 7, 0.45);" />
+  <img src="../../assets/day17_animation.gif" alt="Albino Python Realistic Vector Sketch Art Preview" width="520px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(130, 5, 11, 0.45);" />
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Completed%20%E2%9C%85-brightgreen?style=for-the-badge" alt="Status" />
   <img src="https://img.shields.io/badge/Language-Python%203.10%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/Category-Generative%20Art%20%26%20Digital%20Sketching-760107?style=for-the-badge" alt="Category" />
+  <img src="https://img.shields.io/badge/Category-Generative%20Art%20%26%20Vector%20Sketching-82050B?style=for-the-badge" alt="Category" />
 </p>
 
 ---
 
 ## 📖 Overview
 
-Day 17 elevates the challenge with a high-fidelity digital art drawing simulation: **Albino Python Realistic Digital Sketch Art**.
+Day 17 delivers an authentic generative vector sketching simulation: **Albino Python Realistic Vector Sketch Art**.
 
-Translating a photorealistic illustration of a coiled albino python on deep crimson paper (`python snake image.jpeg`), this project implements an authentic multi-stage sketch animation engine that delivers **100% exact visual fidelity with silky-smooth rendering**:
-1. **Exact Reference Fidelity (Zero Blocky Noise)**: Faithfully reproduces every pearlescent scale, iridescent highlight, peach underbelly ventral plate, glowing ruby-red eye, forked tongue, and rich crimson vignette.
-2. **Phase 1: Anatomical Contour Underdrawing**: An ergonomic artist stylus glides along the OpenCV-extracted anatomical contours, sketching out the coiled body, head plates, eye, and tongue in delicate graphite strokes.
-3. **Phase 2: Progressive Volumetric Shading & Scale Revealing**: The pencil sweeps across the snake in continuous diagonal bands, smoothly rendering small portions (brush radius ~26 px) of the photorealistic 3D scales.
-4. **Ergonomic 3D Artist Stylus**: An authentic pencil model leads the stroke with an active pigment lead tip, cedar wood cone, colored barrel, and floating graphite dust particles.
+Translating the reference masterpiece of a coiled albino python on deep crimson paper (`python snake image.jpeg`), this project implements a true vector sketching engine using **Python Turtle graphics** and **OpenCV**:
+1. **Authentic Vector Sketching**: An active arrow-pen physically sketches out the artwork stroke-by-stroke, drawing anatomical color polygons and delicately inking scales, head plates, and features.
+2. **Vibrant Crimson Canvas Background**: Faithfully calibrated to `#82050B`, matching the rich crimson red of the reference artwork without muddy vignette borders cutting across empty canvas.
+3. **Dual-Phase Vector Pipeline**:
+   - **Phase 1: Anatomic Body Polygons**: Traces and fills over 1,000 chromatic vector polygons (ivory, pearl, blush rose, and peach underbelly scutes), sorted by area to lay down base anatomical forms first.
+   - **Phase 2: High-Definition Inking**: Inks over 1,400 delicate contour lines across the coiled body, jawline, glowing ruby-red eye, and cephalic scales.
+4. **Normalized Centered Viewport**: Configured with `setworldcoordinates(-450, -450, 450, 450)` on an $850 \times 850$ canvas, perfectly centering the crouching python with generous breathing room.
 
 ---
 
@@ -39,63 +41,58 @@ Translating a photorealistic illustration of a coiled albino python on deep crim
                  │
                  ▼
 ┌─────────────────────────────────┐
-│ OpenCV Bilateral Contour Pass   │ Extracts 1,300+ smooth anatomical sketch paths
+│ Dynamic Path Resolution         │ Seamless execution across any directory or OS
 └────────────────┬────────────────┘
                  │
                  ▼
 ┌─────────────────────────────────┐
-│ Continuous Diagonal Trajectory  │ Generates serpentine corner-to-corner sweep bands
+│ Bilateral Filter & K-Means      │ 24-cluster chromatic quantization for pearlescent tones
 └────────────────┬────────────────┘
                  │
       ┌──────────┴──────────────────────────┐
       ▼                                     ▼
 ┌───────────────────────────┐ ┌───────────────────────────┐
-│ Phase 1: Underdrawing     │ │ Phase 2: Scale Shading    │
-│ • Graphite sketch lines   │ │ • Progressive revelation  │
-│ • S-coils & head plates   │ │ • Exact pixel fidelity    │
-│ • Fierce ruby eye & tongue│ │ • Active lead tip color   │
+│ Phase 1: Vector Polygons  │ │ Phase 2: Contour Inking   │
+│ • 1,000+ chromatic flats  │ │ • 1,400+ scale contours   │
+│ • Ivory, peach & scutes   │ │ • Ruby eye & jawline      │
+│ • Sorted large to small   │ │ • Fine Canny edge inking  │
 └─────────────┬─────────────┘ └─────────────┬─────────────┘
               │                             │
               └──────────────┬──────────────┘
                              ▼
               ┌─────────────────────────────┐
-              │ Hardware 60 FPS Pygame Loop │
-              │ • 3D artist pencil model    │
-              │ • Real-time telemetry HUD   │
-              │ • Vice-Versa & loop control │
+              │ Python Turtle Sketch Engine │
+              │ • Normalized [-450, 450]    │
+              │ • Classic arrow-pen stylus  │
+              │ • Rich #82050B crimson bg   │
+              │ • Real-time interactive keys│
               └─────────────────────────────┘
 ```
 
 ### 1. Dynamic Path Resolution
-Eliminates brittle hardcoded absolute filesystem paths (`/days/...`) that cause immediate crashes on Unix/macOS environments. Automatically locates `python snake image.jpeg` whether invoked from the repository root, within the project folder, or via an IDE run configuration.
+Eliminates hardcoded absolute filesystem paths that fail across environments. Automatically resolves `python snake image.jpeg` from the script folder, parent workspace, or root path.
 
-### 2. Anatomical Contour Sketching (Phase 1)
-Extracts over 1,300 ordered contour curves using Canny gradient thresholds ($T_1 = 35, T_2 = 110$) and bilateral filtering. The artist's pencil traces the body curves, jawline, eye socket, and forked tongue, leaving delicate pencil sketch lines on the crimson canvas.
+### 2. Chromatic Quantization (24 Clusters)
+Applies edge-preserving bilateral filtering ($d=7, \sigma_c=40, \sigma_s=40$) to smooth sensor grain while preserving crisp scale boundaries, followed by Lloyd's K-Means clustering to extract dominant pearlescent, blush rose, and ivory tones.
 
-### 3. Continuous Diagonal Trajectory Generation (Phase 2)
-Generates continuous zig-zag diagonal bands across the canvas ($x + y = d$), ensuring complete, seamless coverage from Top-Left to Bottom-Right (or Vice-Versa). At each point, small portions (radius ~26 px) of the master image are revealed directly under the pencil tip.
-
-### 4. Dynamic Lead Color & Graphite Particles
-The pencil tip samples the exact RGB pigment of the active contact coordinate, dynamically adapting its lead color as it passes over pearlescent scales, pinkish scutes, or the incandescent ruby iris. Subtle graphite dust particles drift gently from the active stroke.
+### 3. Dual-Phase Drawing Execution
+- **Phase 1 (Anatomical Base Polygons)**: Draws the broad body musculature, ventral scutes, and dorsal highlights in descending area order.
+- **Phase 2 (Ink Detailing)**: Switches pen to fine line drawing, tracing scale borders, cephalic head plates, ruby iris, and forked tongue.
 
 ---
 
 ## 🎮 Interactive Keyboard Controls
 
-During animation, interact with the canvas in real time:
+Control the Turtle sketch simulation in real time:
 
 | Key | Action | Description |
 | :---: | :--- | :--- |
-| **`[SPACE]`** | **Pause / Resume** | Freezes the drawing loop to inspect individual pencil strokes |
-| **`[V]`** | **Vice-Versa** | Inverts sweep direction between Top-Left and Bottom-Right |
-| **`[R]`** | **Restart** | Restarts the current drawing pass from the beginning |
-| **`[A]`** | **Auto-Loop** | Toggles continuous cyclic redrawing |
-| **`[+]` / `[UP]`** | **Speed Up** | Increases stroke points rendered per frame |
-| **`[-]` / `[DOWN]`** | **Slow Down** | Reduces speed for meditative viewing |
-| **`[1]` – `[4]`** | **Speed Presets** | Instant presets (1: Meditative, 2: Standard, 3: Fast, 4: Turbo) |
-| **`[C]` / `[F]`** | **Fast-Forward** | Instantly reveals the complete finished artwork |
-| **`[S]`** | **Save Artwork** | Exports a pixel-perfect high-resolution PNG to `output/` |
-| **`[ESC]` / `[Q]`** | **Exit** | Safely shuts down window |
+| **`[SPACE]`** | **Pause / Resume** | Freezes the drawing loop to inspect individual vector strokes |
+| **`[+]`** | **Speed Up** | Increases batch step size for faster drawing progression |
+| **`[-]`** | **Slow Down** | Decreases batch step size for meditative, deliberate sketching |
+| **`[C]`** | **Complete Instantly** | Fast-forwards directly to the finished masterpiece |
+| **`[S]`** | **Save Artwork** | Saves high-resolution PostScript / PNG export |
+| **`[ESC]` / `[Q]`** | **Exit** | Gracefully closes the Turtle canvas |
 
 ---
 
@@ -104,8 +101,10 @@ During animation, interact with the canvas in real time:
 Ensure Python 3.10+ is installed:
 
 ```bash
-pip install pygame-ce opencv-python numpy pillow
+pip install opencv-python numpy pillow
 ```
+
+*(Note: Turtle is part of the Python standard library).*
 
 ---
 
@@ -131,8 +130,8 @@ python main.py
 ```text
 Day-17-Python Sketch/
 ├── README.md                  # Comprehensive project documentation
-├── main.py                    # Complete executable sketch & animation script
-└── python snake image.jpeg    # Reference albino python crouching artwork
+├── main.py                    # Complete executable vector sketch script
+└── python snake image.jpeg    # Reference albino python artwork
 ```
 
 ---
