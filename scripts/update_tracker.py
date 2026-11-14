@@ -161,9 +161,9 @@ CURRICULUM = [
     },
     {
         "day": 17,
-        "title": "Albino Python Realistic Vector Sketch Art",
-        "description": "Algorithmic vector sketch animation capturing an albino python on deep crimson paper with K-Means palette extraction, Douglas-Peucker contour inking, and normalized world coordinates.",
-        "concepts": "Python Turtle, OpenCV K-Means, Scale Contour Tracing, Douglas-Peucker Decimation, Normalized Coordinates",
+        "title": "Albino Python Realistic Digital Sketch Art",
+        "description": "Authentic dual-phase digital sketch simulation recreating the albino python on deep crimson paper with contour underdrawing, progressive scale shading, and an ergonomic artist pencil stylus.",
+        "concepts": "Pygame, OpenCV Canny Contours, Progressive Shading Trajectories, Dynamic Stylus Physics",
         "category": "Generative Art",
         "folder": "Day-17-Python Sketch",
         "entry": "days/Day-17-Python Sketch/main.py",
