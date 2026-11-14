@@ -15,7 +15,7 @@
 
   <p align="center">
     <!-- PROGRESS_BADGE_START -->
-<img src="https://img.shields.io/badge/Progress-16%2F30%20(53.3%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-16%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-14-f59e0b?style=for-the-badge" alt="Days Left" />
+<img src="https://img.shields.io/badge/Progress-17%2F30%20(56.7%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-17%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-13-f59e0b?style=for-the-badge" alt="Days Left" />
 <!-- PROGRESS_BADGE_END -->
   </p>
 
@@ -67,7 +67,7 @@ Every single day is structured around building a complete, runnable application 
 
 <!-- PROGRESS_BAR_START -->
 ```text
-[███████████████░░░░░░░░░░░░░] 53.3% (16/30 Days Completed)
+[████████████████░░░░░░░░░░░░] 56.7% (17/30 Days Completed)
 ```
 <!-- PROGRESS_BAR_END -->
 
@@ -104,8 +104,8 @@ Every single day is structured around building a complete, runnable application 
 | **Day 14** | [Interactive Spider Web on a Building Corner](days/Day-14-Spider-Web) | `Pygame, Catenary Curves, Alpha Compositing, Air Current Physics, Architectural Perspective` | Generative Art | `✅ Completed` | [Source](days/Day-14-Spider-Web/main.py) |
 | **Day 15** | [Geometric Square Spiral Vortex Art](days/Day-15-Geometric-Square-Spiral) | `Pygame, Polygonal Spirals, Precession Math, Multi-Pass Bloom, HSV Chromatic Flow` | Generative Art | `✅ Completed` | [Source](days/Day-15-Geometric-Square-Spiral/main.py) |
 | **Day 16** | [Spider-Man Comic Vector Sketch Art](days/Day-16-Spiderman-Sketch) | `Python Turtle, OpenCV K-Means Quantization, Polygon Approximation DP, Silk Web Inking` | Generative Art | `✅ Completed` | [Source](days/Day-16-Spiderman-Sketch/main.py) |
-| **Day 17** | **Gravitational Solar System Simulator** | `Newtonian Gravity, Orbital Mechanics, Vector Acceleration` | Physics Simulation | `⏳ Up Next` | *(Building)* |
-| **Day 18** | Matrix Digital Rain Visualizer | `Terminal Buffering, Glyph Streams, Decay Timing` | Visual Effects | `🔒 Planned` | — |
+| **Day 17** | [Gravitational Solar System Simulator](days/Day-17-Solar-System-Simulator) | `Newtonian Gravity, Orbital Mechanics, Vector Acceleration` | Physics Simulation | `✅ Completed` | [Source](days/Day-17-Solar-System-Simulator/main.py) |
+| **Day 18** | **Matrix Digital Rain Visualizer** | `Terminal Buffering, Glyph Streams, Decay Timing` | Visual Effects | `⏳ Up Next` | *(Building)* |
 | **Day 19** | Sorting Algorithm Visualizer | `Sorting Algorithms, Visual Bar Swaps, Algorithmic Complexity` | Algorithm Visualizer | `🔒 Planned` | — |
 | **Day 20** | Double Pendulum Chaos Simulator | `Chaos Theory, Lagrangian Mechanics, Numerical Integration` | Physics Simulation | `🔒 Planned` | — |
 | **Day 21** | Retro Space Invaders Arcade | `Sprite Arrays, Projectile Management, Marching Movement Logic` | 2D Game Dev | `🔒 Planned` | — |
