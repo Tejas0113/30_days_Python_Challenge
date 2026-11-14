@@ -161,12 +161,12 @@ CURRICULUM = [
     },
     {
         "day": 17,
-        "title": "Gravitational Solar System Simulator",
-        "description": "Multi-body planetary orbital mechanics simulation using Newton's law of universal gravitation with glowing orbit trails.",
-        "concepts": "Newtonian Gravity, Orbital Mechanics, Vector Acceleration",
-        "category": "Physics Simulation",
-        "folder": "Day-17-Solar-System-Simulator",
-        "entry": "days/Day-17-Solar-System-Simulator/main.py",
+        "title": "Albino Python Realistic Vector Sketch Art",
+        "description": "Algorithmic vector sketch animation capturing an albino python on deep crimson paper with K-Means palette extraction, Douglas-Peucker contour inking, and normalized world coordinates.",
+        "concepts": "Python Turtle, OpenCV K-Means, Scale Contour Tracing, Douglas-Peucker Decimation, Normalized Coordinates",
+        "category": "Generative Art",
+        "folder": "Day-17-Python Sketch",
+        "entry": "days/Day-17-Python Sketch/main.py",
     },
     {
         "day": 18,
