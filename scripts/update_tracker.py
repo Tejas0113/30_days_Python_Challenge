@@ -171,8 +171,8 @@ CURRICULUM = [
     {
         "day": 18,
         "title": "Generative Parametric Spiral Vortex Art",
-        "description": "High-fidelity dual-mode generative art simulation with multi-layer vector silk thread weaving and real-time interactive parametric ribbon dynamics in Pygame.",
-        "concepts": "Pygame-CE, Vector Streamlines, Ruled Surfaces, Mouse Gravity Warping, Alpha Gauze Compositing",
+        "description": "High-definition dual-mode generative art simulation with 28,000+ precision vector silk threads, contrast booster, diamond moiré lattice, and real-time interactive ribbon dynamics.",
+        "concepts": "Pygame-CE, Vector Streamlines, Ruled Surfaces, Mouse Gravity Warping, Dynamic Contrast Booster",
         "category": "Generative Art",
         "folder": "Day-18-Spiral-Vortex-Art",
         "entry": "days/Day-18-Spiral-Vortex-Art/main.py",

@@ -1,4 +1,4 @@
-# 🌀 Day 18: Generative Parametric Spiral Vortex Art
+# 🌀 Day 18: Generative Parametric Spiral Vortex Art (High-Definition Edition)
 
 > **30 Days of Python Challenge** · Level Up Your Python Skills  
 > Created by **[@Tejas0113](https://github.com/Tejas0113)**
@@ -6,37 +6,40 @@
 ---
 
 <p align="center">
-  <img src="../../assets/day18_animation.gif" alt="Generative Parametric Spiral Vortex Art Preview" width="540px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(185, 110, 95, 0.35);" />
+  <img src="../../assets/day18_animation.gif" alt="Generative Parametric Spiral Vortex Art Preview" width="540px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(195, 85, 65, 0.40);" />
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Completed%20%E2%9C%85-brightgreen?style=for-the-badge" alt="Status" />
   <img src="https://img.shields.io/badge/Language-Python%203.10%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/Category-Generative%20Art%20%26%20Parametric%20Caustics-B96E5F?style=for-the-badge" alt="Category" />
+  <img src="https://img.shields.io/badge/Category-Generative%20Art%20%26%20Parametric%20Caustics-C35541?style=for-the-badge" alt="Category" />
 </p>
 
 ---
 
 ## 📖 Overview
 
-Day 18 delivers a mesmerizing, high-fidelity generative simulation: **Generative Parametric Spiral Vortex Art**.
+Day 18 delivers a mesmerizing, high-definition generative simulation: **Generative Parametric Spiral Vortex Art (High-Definition Edition)**.
 
 Inspired by circular loom thread weaving, mathematical ruled-surface ribbons, and optical caustic interference, this project implements a dual-mode art engine running silky-smooth at 60 FPS in **Pygame-CE**:
 
-1. **Mode 1: The Masterpiece Weaver (Exact Reference Artwork)**:
-   - Faithfully weaves the exact reference artwork (`spiral_vortex_art.jpg`) stroke-by-stroke with **8,200+ translucent vector silk threads**.
-   - Structured across 4 chromatic and anatomical layers:
+1. **Mode 1: The Masterpiece Weaver (Enhanced High-Contrast Edition)**:
+   - Faithfully weaves the reference artwork (`spiral_vortex_art.jpg`) stroke-by-stroke with **28,000+ precision vector threads** across 5 distinct thematic layers:
      - **Layer 1: Outer Halo & Perimeter Rings**: Ethereal blush rose (`#C8B4B4`) and silver (`#8A8A92`) concentric boundary loops.
-     - **Layer 2: Structural Ribbons & Mid-Tone Gauze**: Translucent graphite threads forming the swirling body and inner vortex eye.
-     - **Layer 3: Terracotta & Copper Folded Ribbon Accent**: Warm earth tone (`#B96E5F`) folded ribbon lobe in the upper right.
-     - **Layer 4: Deep Charcoal & Black Caustic Pinches**: Intense focal pinch fold in the lower left (`#121316`).
+     - **Layer 2: Structural Gauze & Body Swirls**: Dense graphite threads forming the swirling body and inner vortex eye.
+     - **Layer 3: Terracotta & Copper Folded Ribbon Accent**: Rich, vibrant warm earth tone (`#C35541`) folded ribbon lobe in the upper right.
+     - **Layer 4: Deep Charcoal & Black Caustic Pinches**: Intense, velvety black focal pinch fold (`#101114`) in the lower left.
+     - **Layer 5: Crisp Caustic Edge Filaments**: Razor-sharp structural boundary contours defining the folds, eyes, and perimeter.
+   - **Dynamic Contrast & Opacity Booster (`[B]` / `[V]`)**: Instantly dials up/down thread opacity and visual punchiness on the fly.
+   - **Dual-Canvas Modes (`[T]`)**: Seamlessly toggle between Studio Gallery White and Obsidian Dark Glow.
    - Guided by an active golden drafting stylus cursor with soft drifting stardust particles.
 
-2. **Mode 2: Live Parametric Vortex Studio**:
-   - Real-time mathematical ribbon simulation driven by multi-layered logarithmic spiral spines, harmonic ribbon widths, and ruled-surface cross-chords.
-   - **Interactive Mouse Gravity Warp**: Move or drag the mouse to dynamically bend, twist, and pull the vortex field with spring physics.
-   - **Scroll-Wheel Fractal Zoom**: Zoom seamlessly into the hypnotic central singularity.
-   - **5 Curated Color Themes**: Studio Minimalist, Obsidian Gold, Cyberpunk Neon, Emerald Aurora, and Monochrome Blueprint.
+2. **Mode 2: Live Parametric Vortex Studio (Diamond Moiré Lattice)**:
+   - Real-time 60 FPS mathematical ribbon simulation driven by multi-layered logarithmic spiral spines, harmonic ribbon widths, and cross-braided diamond moiré ruled-surface chords.
+   - **Harmonic Breathing Organism**: Ribbons smoothly expand and contract with organic wave pulsation (`[G]`).
+   - **Interactive Mouse Gravity Warp**: Move or drag the mouse to dynamically bend, twist, and pull the vortex field with spring physics (`[M]`).
+   - **Scroll-Wheel Fractal Zoom**: Zoom seamlessly into the hypnotic central singularity ($0.3\times$ to $4.0\times$).
+   - **6 Curated Color Themes**: Studio Minimalist, Obsidian Gold, Cyberpunk Neon, Emerald Aurora, Monochrome Blueprint, and Royal Amethyst.
 
 ---
 
@@ -50,22 +53,22 @@ Inspired by circular loom thread weaving, mathematical ruled-surface ribbons, an
                  │
                  ▼
 ┌─────────────────────────────────┐
-│ Vector Tangent Field Analysis   │ Sobel gradients & structure tensor ((-gy, gx) / ||g||)
+│ Vector Tangent Field & Canny    │ Sobel gradients ((-gy, gx) / ||g||) + Canny structural edges
 └────────────────┬────────────────┘
                  │
                  ▼
 ┌─────────────────────────────────┐
-│ 4-Layer Probabilistic Sampling  │ Halo, Mid-Tone Gauze, Terracotta Lobe, Charcoal Caustics
+│ 5-Layer Probabilistic Sampling  │ Halo, Structural Gauze, Terracotta Lobe, Charcoal, Edge Filaments
 └────────────────┬────────────────┘
                  │
       ┌──────────┴──────────────────────────┐
       ▼                                     ▼
 ┌───────────────────────────┐ ┌───────────────────────────┐
 │ Mode 1: Masterpiece Weaver│ │ Mode 2: Parametric Studio │
-│ • 8,200+ vector threads   │ │ • Real-time 60 FPS math   │
-│ • Golden stylus & stardust│ │ • Logarithmic spiral spine│
-│ • Alpha gauze caustics    │ │ • Mouse gravity warping   │
-│ • Centripetal spiral sweep│ │ • 5 live color palettes   │
+│ • 28,000+ vector threads  │ │ • Real-time 60 FPS math   │
+│ • Golden stylus & stardust│ │ • Counter-twist diamond   │
+│ • Contrast booster [B/V]  │ │ • Mouse gravity warping   │
+│ • Dark/Light canvas [T]   │ │ • 6 live color palettes   │
 └─────────────┬─────────────┘ └─────────────┬─────────────┘
               │                             │
               └──────────────┬──────────────┘
@@ -78,17 +81,6 @@ Inspired by circular loom thread weaving, mathematical ruled-surface ribbons, an
               └─────────────────────────────┘
 ```
 
-### 1. Vector Tangent Field Integration
-The engine converts the raster artwork into a continuous vector direction field using Sobel operator gradients:
-$$\mathbf{T}(x, y) = \frac{(-G_y, G_x)}{\sqrt{G_x^2 + G_y^2 + \epsilon}}$$
-Streamlines are integrated bi-directionally along $\mathbf{T}(x, y)$ using Runge-Kutta / Euler integration, tracing out natural silk fibers that naturally congregate where caustics fold and pinch.
-
-### 2. Ruled Surface & Transverse Chords (Mode 2)
-In the Parametric Studio, ribbons are generated from $K$ logarithmic spiral curves:
-$$r_k(t) = \left(r_0 + R_0 t^{0.85}\right) \cdot Z, \quad \theta_k(t) = t \cdot \omega \pi + \phi_k + \Omega t$$
-Transverse ruled-surface cross-chords connect opposing edges $\mathbf{p}_1(t) = \mathbf{c}(t) + W(t)\mathbf{n}(t)$ and $\mathbf{p}_2(t) = \mathbf{c}(t) - W(t)\mathbf{n}(t)$ with harmonic width modulation:
-$$W(t) = \left(w_0 + w_1 \sin(6\pi t + 1.5\phi_k)(1 - 0.35t)\right) \cdot S_w$$
-
 ---
 
 ## 🎮 Interactive Keyboard & Mouse Controls
@@ -98,9 +90,11 @@ $$W(t) = \left(w_0 + w_1 \sin(6\pi t + 1.5\phi_k)(1 - 0.35t)\right) \cdot S_w$$
 | **`[1]`** | **Masterpiece Weaver** | Global | Switches to Mode 1 (Exact reference reproduction) |
 | **`[2]`** | **Parametric Studio** | Global | Switches to Mode 2 (Interactive real-time ribbon studio) |
 | **`[SPACE]`** | **Pause / Resume** | Global | Freezes animation / drawing loop |
-| **`[T]`** | **Cycle Themes** | Mode 2 | Cycles 5 palettes (Studio, Obsidian, Cyberpunk, Emerald, Blueprint) |
+| **`[B]` / `[V]`** | **Boost / Reduce Contrast**| Both | Dynamically dials up/down thread opacity and visual punchiness |
+| **`[T]`** | **Theme / Canvas Mode** | Both | Cycles themes (Mode 2) or toggles Dark/Light canvas (Mode 1) |
 | **`[M]`** | **Mouse Gravity Warp**| Mode 2 | Toggles mouse gravitational field pull on ribbons |
-| **`[Mouse Wheel]`**| **Fractal Zoom** | Mode 2 | Smoothly zooms in/out of the vortex core ($0.4\times$ to $3.5\times$) |
+| **`[G]`** | **Harmonic Breathing**| Mode 2 | Toggles organic harmonic pulsation |
+| **`[Mouse Wheel]`**| **Fractal Zoom** | Mode 2 | Smoothly zooms in/out of the vortex core ($0.3\times$ to $4.0\times$) |
 | **`[W]` / `[S]`** | **Ribbon Width** | Mode 2 | Expands or contracts transverse chord width |
 | **`[F]` / `[D]`** | **Spiral Twist** | Mode 2 | Increases or decreases twist frequency |
 | **`[+]` / `[-]`** | **Speed / Density** | Both | Adjusts thread batch rate (Mode 1) or frequency (Mode 2) |
