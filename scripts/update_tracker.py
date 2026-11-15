@@ -170,12 +170,12 @@ CURRICULUM = [
     },
     {
         "day": 18,
-        "title": "Matrix Digital Rain Visualizer",
-        "description": "Hypnotic falling green Japanese katakana & code rain with decaying phosphorescent light trails.",
-        "concepts": "Terminal Buffering, Glyph Streams, Decay Timing",
-        "category": "Visual Effects",
-        "folder": "Day-18-Matrix-Rain-Visualizer",
-        "entry": "days/Day-18-Matrix-Rain-Visualizer/main.py",
+        "title": "Generative Parametric Spiral Vortex Art",
+        "description": "High-fidelity dual-mode generative art simulation with multi-layer vector silk thread weaving and real-time interactive parametric ribbon dynamics in Pygame.",
+        "concepts": "Pygame-CE, Vector Streamlines, Ruled Surfaces, Mouse Gravity Warping, Alpha Gauze Compositing",
+        "category": "Generative Art",
+        "folder": "Day-18-Spiral-Vortex-Art",
+        "entry": "days/Day-18-Spiral-Vortex-Art/main.py",
     },
     {
         "day": 19,
