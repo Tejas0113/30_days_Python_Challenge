@@ -179,12 +179,12 @@ CURRICULUM = [
     },
     {
         "day": 19,
-        "title": "Sorting Algorithm Visualizer",
-        "description": "Animated visual comparison of Bubble, Selection, Insertion, and Quick Sort with real-time bar height swaps and colors.",
-        "concepts": "Sorting Algorithms, Visual Bar Swaps, Algorithmic Complexity",
-        "category": "Algorithm Visualizer",
-        "folder": "Day-19-Sorting-Visualizer",
-        "entry": "days/Day-19-Sorting-Visualizer/main.py",
+        "title": "3D Kinetic Phyllotaxis Spiral Galaxy",
+        "description": "Mesmerizing 3D generative spiral galaxy with Golden Angle phyllotaxis, 4 mathematical topologies, harmonic wave undulations, and interactive 3D camera controls in Pygame.",
+        "concepts": "3D Perspective Projection, Golden Angle Phyllotaxis, Harmonic Waves, Depth Fogging, 3D Camera Damping",
+        "category": "Generative Art",
+        "folder": "Day-19-Phyllotaxis-Spiral-Galaxy",
+        "entry": "days/Day-19-Phyllotaxis-Spiral-Galaxy/main.py",
     },
     {
         "day": 20,
