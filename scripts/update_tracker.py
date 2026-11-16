@@ -188,12 +188,12 @@ CURRICULUM = [
     },
     {
         "day": 20,
-        "title": "Double Pendulum Chaos Simulator",
-        "description": "Physics simulation of a chaotic double pendulum tracing unpredictable, beautiful kaleidoscopic phase space trails.",
-        "concepts": "Chaos Theory, Lagrangian Mechanics, Numerical Integration",
-        "category": "Physics Simulation",
-        "folder": "Day-20-Double-Pendulum-Chaos",
-        "entry": "days/Day-20-Double-Pendulum-Chaos/main.py",
+        "title": "Bioluminescent Deep-Sea Jellyfish Art",
+        "description": "Breathtaking deep-sea simulation with procedural pulsating jellyfish, Verlet-integrated tentacles, hydrodynamic ripples, and drifting marine snow in Pygame.",
+        "concepts": "Procedural Animation, Verlet Integration, Fluid Drag Hydrodynamics, Bezier Curves, Bioluminescence",
+        "category": "Generative Art",
+        "folder": "Day-20-Bioluminescent-Jellyfish-Art",
+        "entry": "days/Day-20-Bioluminescent-Jellyfish-Art/main.py",
     },
     {
         "day": 21,
