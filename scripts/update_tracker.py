@@ -206,12 +206,12 @@ CURRICULUM = [
     },
     {
         "day": 22,
-        "title": "Algorithmic Maze Generator & Solver",
-        "description": "Procedural maze generation using Recursive Backtracking / Depth-First Search with live visual pathfinding resolution.",
-        "concepts": "Depth-First Search (DFS), Recursive Backtracking, Graph Traversal",
-        "category": "Algorithm Visualizer",
-        "folder": "Day-22-Maze-Generator-Solver",
-        "entry": "days/Day-22-Maze-Generator-Solver/main.py",
+        "title": "3D Relativistic Black Hole & Accretion Vortex",
+        "description": "General relativistic astrophysics simulation with Schwarzschild event horizon, Keplerian accretion disk, Doppler beaming, and magnetic plasma jets in Pygame.",
+        "concepts": "General Relativity Simulation, Relativistic Doppler Beaming, Gravitational Lensing, Helical Magnetic Jets, Runge-Kutta Photon Orbits",
+        "category": "Physics Simulation",
+        "folder": "Day-22-Black-Hole-Accretion-Disk",
+        "entry": "days/Day-22-Black-Hole-Accretion-Disk/main.py",
     },
     {
         "day": 23,
