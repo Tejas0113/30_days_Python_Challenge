@@ -15,7 +15,7 @@
 
   <p align="center">
     <!-- PROGRESS_BADGE_START -->
-<img src="https://img.shields.io/badge/Progress-20%2F30%20(66.7%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-20%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-10-f59e0b?style=for-the-badge" alt="Days Left" />
+<img src="https://img.shields.io/badge/Progress-21%2F30%20(70.0%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-21%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-9-f59e0b?style=for-the-badge" alt="Days Left" />
 <!-- PROGRESS_BADGE_END -->
   </p>
 
@@ -67,7 +67,7 @@ Every single day is structured around building a complete, runnable application 
 
 <!-- PROGRESS_BAR_START -->
 ```text
-[███████████████████░░░░░░░░░] 66.7% (20/30 Days Completed)
+[████████████████████░░░░░░░░] 70.0% (21/30 Days Completed)
 ```
 <!-- PROGRESS_BAR_END -->
 
@@ -107,9 +107,9 @@ Every single day is structured around building a complete, runnable application 
 | **Day 17** | [Albino Python Realistic Vector Sketch Art](days/Day-17-Python Sketch) | `Python Turtle, OpenCV K-Means Quantization, Contour Inking, Normalized World Coordinates` | Generative Art | `✅ Completed` | [Source](days/Day-17-Python Sketch/main.py) |
 | **Day 18** | [Generative Parametric Spiral Vortex Art](days/Day-18-Spiral-Vortex-Art) | `Pygame-CE, Vector Streamlines, Ruled Surfaces, Mouse Gravity Warping, Dynamic Contrast Booster` | Generative Art | `✅ Completed` | [Source](days/Day-18-Spiral-Vortex-Art/main.py) |
 | **Day 19** | [3D Kinetic Phyllotaxis Spiral Galaxy](days/Day-19-Phyllotaxis-Spiral-Galaxy) | `3D Perspective Projection, Golden Angle Phyllotaxis, Harmonic Waves, Depth Fogging, 3D Camera Damping` | Generative Art | `✅ Completed` | [Source](days/Day-19-Phyllotaxis-Spiral-Galaxy/main.py) |
-| **Day 20** | [Bioluminescent Deep-Sea Jellyfish Art](days/Day-20-Bioluminescent-Jellyfish-Art) | `Procedural Animation, Verlet Integration, Fluid Drag Hydrodynamics, Bezier Curves, Bioluminescence` | Generative Art | `✅ Completed` | [Source](days/Day-20-Bioluminescent-Jellyfish-Art/main.py) |
-| **Day 21** | **Retro Space Invaders Arcade** | `Sprite Arrays, Projectile Management, Marching Movement Logic` | 2D Game Dev | `⏳ Up Next` | *(Building)* |
-| **Day 22** | Algorithmic Maze Generator & Solver | `Depth-First Search (DFS), Recursive Backtracking, Graph Traversal` | Algorithm Visualizer | `🔒 Planned` | — |
+| **Day 20** | [Double Pendulum Chaos Simulator](days/Day-20-Double-Pendulum-Chaos) | `Chaos Theory, Lagrangian Mechanics, Numerical Integration` | Physics Simulation | `✅ Completed` | [Source](days/Day-20-Double-Pendulum-Chaos/main.py) |
+| **Day 21** | [Retro Space Invaders Arcade](days/Day-21-Space-Invaders) | `Sprite Arrays, Projectile Management, Marching Movement Logic` | 2D Game Dev | `✅ Completed` | [Source](days/Day-21-Space-Invaders/main.py) |
+| **Day 22** | **Algorithmic Maze Generator & Solver** | `Depth-First Search (DFS), Recursive Backtracking, Graph Traversal` | Algorithm Visualizer | `⏳ Up Next` | *(Building)* |
 | **Day 23** | Particle Fireworks & Sparkle Engine | `Particle Systems, Velocity Decay, Radial Burst Physics` | Particle Systems | `🔒 Planned` | — |
 | **Day 24** | Mandelbrot & Julia Set Fractal Explorer | `Complex Numbers, Escape-Time Formula, Color Paletting` | Mathematical Art | `🔒 Planned` | — |
 | **Day 25** | Audio Spectrum & Beat Visualizer | `Fast Fourier Transform (FFT), Frequency Bins, Dynamic Scaling` | Audio & Signal Processing | `🔒 Planned` | — |
