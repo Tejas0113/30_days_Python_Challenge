@@ -3,7 +3,8 @@ Day 21: 3D Quantum Torus Knot & Hopf Fibration Art
 30 Days Python Challenge by Tejas (@Tejas0113)
 
 Description:
-Core mathematical engine for 3D (p, q) torus knot topology and Hopf fibration.
+Multi-mode topological knot generator supporting Trefoil, Cinqfoil, Septagram,
+and Hopf Fibration manifolds with harmonic wave energy propagation.
 """
 
 import math
@@ -39,6 +40,14 @@ THEMES = [
         "tertiary": (255, 205, 40),
         "filament": (70, 170, 230, 60),
     },
+    {
+        "name": "Electric Cyan & Gold",
+        "bg": (6, 12, 20),
+        "primary": (40, 235, 255),
+        "secondary": (255, 215, 65),
+        "tertiary": (165, 250, 185),
+        "filament": (50, 195, 225, 55),
+    },
 ]
 
 
@@ -48,18 +57,56 @@ class TorusKnot3D:
         self.mode = 1
         self.R = 210.0
         self.r = 85.0
+        self.wave_amplitude = 28.0
+        self.wave_freq = 3.2
+        self.circulation_speed = 0.014
         self.indices = np.arange(self.num_nodes, dtype=float)
 
     def compute_positions(self, t):
         n = self.indices
         total = float(self.num_nodes)
-        p, q = 2, 3
-        phi = (n / total) * 2.0 * math.pi + t * 0.4
-        r_eff = self.R + self.r * np.cos(q * phi)
-        x = r_eff * np.cos(p * phi)
-        y = r_eff * np.sin(p * phi)
-        z = -self.r * np.sin(q * phi)
-        return np.column_stack((x, y, z))
+
+        if self.mode == 1:
+            p, q = 2, 3
+            phi = (n / total) * 2.0 * math.pi + t * 0.4
+            r_eff = self.R + self.r * np.cos(q * phi)
+            x = r_eff * np.cos(p * phi)
+            y = r_eff * np.sin(p * phi)
+            wave = self.wave_amplitude * np.sin(phi * 12.0 - t * self.wave_freq)
+            z = -self.r * np.sin(q * phi) + wave
+            return np.column_stack((x, y, z))
+        elif self.mode == 2:
+            p, q = 5, 2
+            phi = (n / total) * 2.0 * math.pi + t * 0.35
+            r_eff = self.R * 0.95 + self.r * 1.15 * np.cos(q * phi)
+            x = r_eff * np.cos(p * phi)
+            y = r_eff * np.sin(p * phi)
+            wave = self.wave_amplitude * np.sin(phi * 15.0 - t * self.wave_freq)
+            z = -self.r * 1.15 * np.sin(q * phi) + wave
+            return np.column_stack((x, y, z))
+        elif self.mode == 3:
+            p, q = 7, 3
+            phi = (n / total) * 2.0 * math.pi + t * 0.3
+            r_eff = self.R * 0.92 + self.r * 1.25 * np.cos(q * phi)
+            x = r_eff * np.cos(p * phi)
+            y = r_eff * np.sin(p * phi)
+            wave = self.wave_amplitude * np.sin(phi * 21.0 - t * self.wave_freq)
+            z = -self.r * 1.25 * np.sin(q * phi) + wave
+            return np.column_stack((x, y, z))
+        else:
+            num_rings = 24
+            nodes_per_ring = self.num_nodes // num_rings
+            ring_idx = n // nodes_per_ring
+            node_in_ring = n % nodes_per_ring
+            theta = (node_in_ring / float(nodes_per_ring)) * 2.0 * math.pi + t * 0.8
+            psi = (ring_idx / float(num_rings)) * 2.0 * math.pi + t * 0.25
+            R_hopf = self.R * (0.65 + 0.45 * np.sin(psi))
+            r_hopf = self.r * (0.8 + 0.3 * np.cos(psi))
+            x = (R_hopf + r_hopf * np.cos(theta)) * np.cos(psi)
+            y = (R_hopf + r_hopf * np.cos(theta)) * np.sin(psi)
+            wave = self.wave_amplitude * 0.8 * np.sin(theta * 3.0 + psi * 2.0 - t * 2.5)
+            z = r_hopf * np.sin(theta) + wave
+            return np.column_stack((x, y, z))
 
 
 def run():
