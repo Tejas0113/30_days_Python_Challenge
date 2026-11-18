@@ -15,7 +15,7 @@
 
   <p align="center">
     <!-- PROGRESS_BADGE_START -->
-<img src="https://img.shields.io/badge/Progress-21%2F30%20(70.0%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-21%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-9-f59e0b?style=for-the-badge" alt="Days Left" />
+<img src="https://img.shields.io/badge/Progress-22%2F30%20(73.3%25)-00f0ff?style=for-the-badge&logo=python&logoColor=white" alt="Progress Badge" /> <img src="https://img.shields.io/badge/Days%20Done-22%20%2F%2030-22c55e?style=for-the-badge" alt="Days Done" /> <img src="https://img.shields.io/badge/Days%20Remaining-8-f59e0b?style=for-the-badge" alt="Days Left" />
 <!-- PROGRESS_BADGE_END -->
   </p>
 
@@ -67,7 +67,7 @@ Every single day is structured around building a complete, runnable application 
 
 <!-- PROGRESS_BAR_START -->
 ```text
-[████████████████████░░░░░░░░] 70.0% (21/30 Days Completed)
+[█████████████████████░░░░░░░] 73.3% (22/30 Days Completed)
 ```
 <!-- PROGRESS_BAR_END -->
 
@@ -109,8 +109,8 @@ Every single day is structured around building a complete, runnable application 
 | **Day 19** | [3D Kinetic Phyllotaxis Spiral Galaxy](days/Day-19-Phyllotaxis-Spiral-Galaxy) | `3D Perspective Projection, Golden Angle Phyllotaxis, Harmonic Waves, Depth Fogging, 3D Camera Damping` | Generative Art | `✅ Completed` | [Source](days/Day-19-Phyllotaxis-Spiral-Galaxy/main.py) |
 | **Day 20** | [Double Pendulum Chaos Simulator](days/Day-20-Double-Pendulum-Chaos) | `Chaos Theory, Lagrangian Mechanics, Numerical Integration` | Physics Simulation | `✅ Completed` | [Source](days/Day-20-Double-Pendulum-Chaos/main.py) |
 | **Day 21** | [3D Quantum Torus Knot & Hopf Fibration Art](days/Day-21-Quantum-Torus-Knot) | `3D Perspective Projection, Torus Knots (p,q), Hopf Fibration Geometry, Harmonic Wave Interference, Geodesic Filaments` | Generative Art | `✅ Completed` | [Source](days/Day-21-Quantum-Torus-Knot/main.py) |
-| **Day 22** | **Algorithmic Maze Generator & Solver** | `Depth-First Search (DFS), Recursive Backtracking, Graph Traversal` | Algorithm Visualizer | `⏳ Up Next` | *(Building)* |
-| **Day 23** | Particle Fireworks & Sparkle Engine | `Particle Systems, Velocity Decay, Radial Burst Physics` | Particle Systems | `🔒 Planned` | — |
+| **Day 22** | [Algorithmic Maze Generator & Solver](days/Day-22-Maze-Generator-Solver) | `Depth-First Search (DFS), Recursive Backtracking, Graph Traversal` | Algorithm Visualizer | `✅ Completed` | [Source](days/Day-22-Maze-Generator-Solver/main.py) |
+| **Day 23** | **Particle Fireworks & Sparkle Engine** | `Particle Systems, Velocity Decay, Radial Burst Physics` | Particle Systems | `⏳ Up Next` | *(Building)* |
 | **Day 24** | Mandelbrot & Julia Set Fractal Explorer | `Complex Numbers, Escape-Time Formula, Color Paletting` | Mathematical Art | `🔒 Planned` | — |
 | **Day 25** | Audio Spectrum & Beat Visualizer | `Fast Fourier Transform (FFT), Frequency Bins, Dynamic Scaling` | Audio & Signal Processing | `🔒 Planned` | — |
 | **Day 26** | Elastic Balls Collision Physics Sandbox | `2D Vector Math, Elastic Collision Response, Momentum Conservation` | Physics Simulation | `🔒 Planned` | — |
